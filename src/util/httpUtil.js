@@ -1,8 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
-import storageUtil from '@/utils/storageUtil'
+import storageUtil from './storageUtil'
 import router from '../router/index'
-const basePath = '/serviceBase/'
+const basePath = '/tuiServer/'
 
 axios.interceptors.request.use(function (config) {
   config.headers.token = window._token || localStorage.getItem('token') || ''

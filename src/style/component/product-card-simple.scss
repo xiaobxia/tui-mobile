@@ -1,0 +1,90 @@
+.product-card-simple {
+  display: block;
+  text-decoration: none;
+  color: $main-text-color;
+  position: relative;
+  padding: 20px 0;
+  margin-top: 25px;
+  background-color: #fff;
+  box-shadow: 0 0 30px rgb(230,230,230);
+  .main-wrap {
+    padding: 0 50px;
+    .icon-wrap {
+      display: inline-block;
+      width: 94px;
+      height: 94px;
+      overflow: hidden;
+      border-radius: 10px;
+      img{
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    margin-bottom: 15px;
+  }
+  .link-wrap{
+    line-height: 36px;
+    font-size: 24px;
+    margin-bottom: 20px;
+    .link-tag {
+      line-height: 1.2;
+      font-size: 22px;
+      float: right;
+      padding: 4px 12px;
+      background-color: $active-color;
+      color: #fff;
+      border-radius: 16px;
+    }
+  }
+  .title-wrap {
+    display: inline-block;
+    padding-left: 20px;
+    width: 500px;
+    vertical-align: top;
+  }
+  .name {
+    margin-bottom: 20px;
+    font-size: 24px;
+    .app-name {
+      font-weight: 600;
+      font-size: 30px;
+    }
+    .right {
+      float: right;
+    }
+  }
+  .detail-wrap {
+    padding: 10px 0 0 0;
+    border-top: 1px solid #eee;
+    position: relative;
+    .detail-item {
+      text-align: center;
+      display: inline-block;
+      &:nth-child(1) {
+        width: 20%;
+      }
+      &:nth-child(3) {
+        width: 40%;
+      }
+      &:nth-child(5) {
+        width: 33%;
+      }
+    }
+    .detail-title {
+      margin-bottom: 5px;
+      font-size: 22px;
+      color: $light-text-color;
+    }
+    .detail-value {
+      font-size: 28px;
+      font-weight: 600;
+    }
+    .line {
+      display: inline-block;
+      width: 1px;
+      height: 50px;
+      background-color: $grey-color;
+    }
+  }
+}

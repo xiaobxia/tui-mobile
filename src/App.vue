@@ -8,15 +8,21 @@
       <router-view v-if="subPath"/>
       <template v-else>
         <index v-if="tabSelect === 'index'"/>
+        <loan v-if="tabSelect === 'loan'"/>
         <mine v-if="tabSelect === 'mine'"></mine>
         <mt-tabbar v-model="tabSelect" :fixed="true">
           <mt-tab-item id="index">
             <!--<img src="./assets/logo.png" alt="" slot="icon">-->
-            <!--<i class="fas fa-donate" slot="icon"></i>-->
-            <h3>首页</h3>
+            <i class="fas fa-home" slot="icon"></i>
+            <span>首页</span>
+          </mt-tab-item>
+          <mt-tab-item id="loan">
+            <i class="far fa-credit-card" slot="icon"></i>
+            <span>借款</span>
           </mt-tab-item>
           <mt-tab-item id="mine">
-            <h3>我的</h3>
+            <i class="fas fa-user" slot="icon"></i>
+            <span>我的</span>
           </mt-tab-item>
         </mt-tabbar>
       </template>
@@ -28,8 +34,10 @@
 import storageUtil from '@/util/storageUtil.js'
 import Mine from '@/tabViews/Mine/index.vue'
 import Index from '@/tabViews/Index/index.vue'
+import Loan from '@/tabViews/Loan/index.vue'
 
 export default {
+  name: 'App',
   data () {
     return {
       subPath: false,
@@ -51,9 +59,8 @@ export default {
         this.$store.dispatch('setTabSelect', val)
       }
     }
-  components: {Index, Mine},
-
-},  name: 'App',
+  },
+  components: {Index, Mine, Loan},
   mounted () {
     this.initPage()
     setInterval(() => {
@@ -95,7 +102,7 @@ export default {
             isLogin: false
           })
           const user = storageUtil.getUserInfo()
-          if (user.isLogin !== true) {
+          if (user.isLogin !== true && this.checkAuthPath()) {
             this.$router.push('/page/login')
           }
         } else {

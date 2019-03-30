@@ -1,18 +1,51 @@
 <template>
   <div class="tab-view tab-view-index">
-    <div class="main-body">
-      <a href="#/page/helloWorld">/page/helloWorld</a>
+    <div class="banner-wrap">
+      <mt-swipe :auto="6000">
+        <mt-swipe-item><img src="../../assets/banner1.jpg" alt=""></mt-swipe-item>
+        <mt-swipe-item><img src="../../assets/banner2.jpg" alt=""></mt-swipe-item>
+      </mt-swipe>
     </div>
+    <div class="title-bar">
+      <span>热门推荐</span>
+      <div class="ad">
+        <mt-swipe :show-indicators="false">
+          <mt-swipe-item v-for="(adItem, index) in adList" :key="index"><span>{{adItem}}</span></mt-swipe-item>
+        </mt-swipe>
+      </div>
+    </div>
+    <div class="product-list">
+      <product-card-simple></product-card-simple>
+    </div>
+    <a href="#/page/tuiguang">/page/tuiguang</a>
   </div>
 </template>
 
 <script>
+import ProductCardSimple from '@/components/ProductCardSimple.vue'
+function createAd () {
+  const numArray = ['139', '138', '137', '136', '135', '134', '159', '158', '157', '150', '151', '152', '188', '187', '182', '183', '184', '178', '130', '131', '132', '156', '155', '186', '185', '176', '133', '153', '189', '180', '181', '177']
+  const index = Math.round((numArray.length - 1) * Math.random())
+  const last = parseInt(Math.random() * 10000)
+  let moneyList = [5000, 1000, 2000, 3000, 4000]
+  const moneyIndex = Math.round((moneyList.length - 1) * Math.random())
+  return `${numArray[index]}****${last}成功借款${moneyList[moneyIndex]}元`
+}
+function createAdList (number) {
+  let list = []
+  for (let i = 0; i < number; i++) {
+    list.push(createAd())
+  }
+  return list
+}
 export default {
   name: 'Index',
   data () {
     return {
+      adList: createAdList(20)
     }
-  }
+  },
+  components: {ProductCardSimple}
 }
 </script>
 

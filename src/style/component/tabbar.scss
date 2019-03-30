@@ -4,24 +4,25 @@
   color: $lighter-text-color;
   .mint-tab-item {
     height: 90px;
-    padding: 5px 0;
+    padding: 8px 0;
+    box-sizing: border-box;
     &.is-selected {
       background-color: $body-color;
       .mint-tab-item-icon, .mint-tab-item-label {
-        color: $green-color;
+        color: $active-color;
       }
     }
   }
   .mint-tab-item-icon {
     margin: 0 auto;
-    width: 65px;
-    height: 65px;
-    font-size: 50px;
+    width: 45px;
+    height: 48px;
+    font-size: 40px;
   }
   .mint-tab-item-label {
-    font-size: 20px;
     color: $light-text-color;
-    p {
+    span {
+      font-size: 24px;
       margin: 0;
     }
   }

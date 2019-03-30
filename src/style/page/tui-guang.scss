@@ -1,0 +1,40 @@
+.page-tui-guang {
+  .bg {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: auto;
+  }
+  .register-wrap {
+    position: relative;
+    margin: 600px auto 0 auto;
+    width: 660px;
+    .mint-cell {
+      margin-bottom: 40px;
+    }
+  }
+  .code-wrap {
+    .mint-field-other {
+      position: absolute;
+      right: 0;
+      height: 100%;
+    }
+    .mint-button {
+      height: 100%;
+      background-color: rgb(224, 58, 78);
+      .mint-button-text {
+        color: #fff;
+        font-size: 30px;
+      }
+    }
+  }
+  .register-btn {
+    width: 100%;
+    background-color: rgb(224, 58, 78);
+    border-radius: 20px;
+    .mint-button-text {
+      color: #fff;
+    }
+  }
+}

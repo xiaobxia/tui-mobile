@@ -10,7 +10,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      "/serviceBase": {
+      "/tuiServer": {
         // "target": "http://47.98.140.76:3010/"
         "target": "http://localhost:3010/"
       }
