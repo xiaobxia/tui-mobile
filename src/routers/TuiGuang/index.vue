@@ -14,16 +14,32 @@
 </template>
 
 <script>
+import environmentUtil from '@/util/environmentUtil.js'
+import storageUtil from '@/util/storageUtil.js'
+
 export default {
   name: 'TuiGuang',
   data () {
     return {
       mobile: '',
-      verification_code: '',
-      msg: 'Welcome to Your Vue.js App'
+      verification_code: ''
     }
   },
+  created () {
+    environmentUtil.createDeviceInfo()
+    this.initPage()
+  },
   methods: {
+    initPage () {
+      const query = this.$router.history.current.query
+      const deviceInfo = storageUtil.getDeviceInfo()
+      // 添加浏览记录
+      this.$http.post('log/addViewLog', {
+        ...deviceInfo,
+        page: 'register',
+        source_channel_id: query.cc || 'sys'
+      })
+    }
   }
 }
 </script>

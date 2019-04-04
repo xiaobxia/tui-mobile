@@ -1,3 +1,6 @@
+import uuidv1 from 'uuid/v1'
+import storageUtil from '@/util/storageUtil.js'
+
 const environmentUtil = {
   setAdaptive () {
     let baseFontSize = 20
@@ -49,6 +52,27 @@ const environmentUtil = {
       baseFontSize: baseFontSize,
       zoom: fontSize / 20
     }
+  },
+  getDeviceType () {
+    const u = navigator.userAgent
+    if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+      return '安卓'
+    } else if (u.indexOf('iPhone') > -1) {
+      return '苹果'
+    } else {
+      const ua = window.navigator.userAgent.toLowerCase()
+      if (ua.match(/MicroMessenger/i) === 'micromessenger') {
+        return '微信'
+      }
+    }
+    return '其他'
+  },
+  createDeviceInfo () {
+    const deviceInfo = storageUtil.getDeviceInfo()
+    if (!deviceInfo.device_id) {
+      storageUtil.setDeviceInfo('device_id', uuidv1())
+    }
+    storageUtil.setDeviceInfo('device_type', this.getDeviceType())
   }
 }
 

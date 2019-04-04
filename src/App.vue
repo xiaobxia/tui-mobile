@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import environmentUtil from '@/util/environmentUtil.js'
 import storageUtil from '@/util/storageUtil.js'
 import Mine from '@/tabViews/Mine/index.vue'
 import Index from '@/tabViews/Index/index.vue'
@@ -61,6 +62,9 @@ export default {
     }
   },
   components: {Index, Mine, Loan},
+  created () {
+    environmentUtil.createDeviceInfo()
+  },
   mounted () {
     this.initPage()
     setInterval(() => {
@@ -111,10 +115,12 @@ export default {
             isLogin: true
           })
         }
+        console.log('in check login')
         this.ifChecked = true
       })
     },
     checkSubPath (path) {
+      console.log('in check subPath')
       this.subPath = path !== '/'
       // this.subPath = path.startsWith('/page')
     },

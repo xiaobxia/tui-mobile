@@ -2,7 +2,7 @@
  * Created by xiaobxia on 2018/5/3.
  */
 function formatKey (key) {
-  return `vueAppBase-${key}`
+  return `tuiMobile-${key}`
 }
 function localStorageGetItem (key) {
   return localStorage.getItem(formatKey(key))
@@ -68,6 +68,38 @@ const storageUtil = {
   removeUserInfo: function () {
     window._userInfo = null
     localStorageRemoveItem('userInfo')
+  },
+  getDeviceInfo: function (key) {
+    let deviceInfo = {}
+    if (window._deviceInfo) {
+      deviceInfo = window._deviceInfo
+    } else {
+      const deviceInfoString = localStorageGetItem('deviceInfo')
+      if (deviceInfoString) {
+        deviceInfo = JSON.parse(deviceInfoString)
+      }
+      window._deviceInfo = deviceInfo
+    }
+    if (key) {
+      return deviceInfo[key]
+    }
+    return deviceInfo
+  },
+  setDeviceInfo: function (key, value) {
+    let deviceInfo = this.getDeviceInfo()
+    deviceInfo[key] = value
+    window._deviceInfo = deviceInfo
+    localStorageSetItem('deviceInfo', JSON.stringify(deviceInfo))
+    return deviceInfo
+  },
+  initDeviceInfo: function (info) {
+    window._deviceInfo = info
+    localStorageSetItem('deviceInfo', JSON.stringify(info))
+    return info
+  },
+  removeDeviceInfo: function () {
+    window._deviceInfo = null
+    localStorageRemoveItem('deviceInfo')
   },
   getSearchHistory: function (key) {
     let searchHistory = {}

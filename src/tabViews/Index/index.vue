@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="product-list">
-      <product-card-simple></product-card-simple>
+      <product-card-simple :list="list"></product-card-simple>
     </div>
     <a href="#/page/tuiguang">/page/tuiguang</a>
   </div>
@@ -23,6 +23,8 @@
 
 <script>
 import ProductCardSimple from '@/components/ProductCardSimple.vue'
+import storageUtil from '@/util/storageUtil.js'
+
 function createAd () {
   const numArray = ['139', '138', '137', '136', '135', '134', '159', '158', '157', '150', '151', '152', '188', '187', '182', '183', '184', '178', '130', '131', '132', '156', '155', '186', '185', '176', '133', '153', '189', '180', '181', '177']
   const index = Math.round((numArray.length - 1) * Math.random())
@@ -42,10 +44,31 @@ export default {
   name: 'Index',
   data () {
     return {
-      adList: createAdList(20)
+      adList: createAdList(20),
+      list: []
     }
   },
-  components: {ProductCardSimple}
+  components: {ProductCardSimple},
+  created () {
+    this.initPage()
+  },
+  methods: {
+    initPage () {
+      const query = this.$router.history.current.query
+      const deviceInfo = storageUtil.getDeviceInfo()
+      // 添加浏览记录
+      this.$http.post('log/addViewLog', {
+        ...deviceInfo,
+        page: 'home',
+        source_channel_id: query.cc || 'sys'
+      })
+      this.$http.get('customer/getUserProducts', {
+        is_recommend: true
+      }).then((res) => {
+        this.list = res.data.list
+      })
+    }
+  }
 }
 </script>
 
