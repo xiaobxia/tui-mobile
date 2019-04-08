@@ -26,11 +26,13 @@ export default {
     initPage () {
       const query = this.$router.history.current.query
       const deviceInfo = storageUtil.getDeviceInfo()
+      const userInfo = storageUtil.getUserInfo()
       // 添加浏览记录
       this.$http.post('log/addViewLog', {
         ...deviceInfo,
         page: 'loan',
-        source_channel_id: query.cc || 'sys'
+        source_channel_id: query.cc || 'sys',
+        mobile: userInfo.mobile
       })
       this.$http.get('customer/getUserProducts').then((res) => {
         this.list = res.data.list

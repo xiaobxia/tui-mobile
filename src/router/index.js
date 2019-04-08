@@ -30,6 +30,14 @@ const routers = [
     }
   },
   {
+    name: 'AboutUs',
+    path: '/page/aboutUs',
+    component: lazyLoading('AboutUs'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     name: 'Login',
     path: '/page/login',
     component: lazyLoading('Login')
