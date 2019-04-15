@@ -9,11 +9,6 @@
       <h3 class="user-name">{{mobile}}</h3>
     </div>
     <div class="my-info-wrap simple">
-      <mt-cell-swipe :to="'/page/myFund'" is-link>
-        <div slot="title">
-          <h3><i class="fas fa-question-circle"></i>常见问题</h3>
-        </div>
-      </mt-cell-swipe>
       <mt-cell-swipe :to="'/page/aboutUs'" is-link>
         <div slot="title">
           <h3><i class="fas fa-users"></i>关于我们</h3>
@@ -22,7 +17,12 @@
     </div>
     <template v-if="!ifUser">
       <div class="btn-wrap">
-        <mt-button type="primary" @click="toLoginHandler" class="main-btn">去一键登录</mt-button>
+        <mt-button type="primary" @click="toLoginHandler" class="main-btn">去登录</mt-button>
+      </div>
+    </template>
+    <template v-else>
+      <div class="btn-wrap">
+        <mt-button type="primary" @click="logoutHandler" class="main-btn">退出登录</mt-button>
       </div>
     </template>
   </div>
@@ -38,14 +38,19 @@ export default {
     return {
       ifUser: user.isLogin === true,
       user: user,
-      mobile: user.isLogin === true ? '1111' : '未登录'
+      mobile: user.isLogin === true ? user.mobile : '未登录'
     }
   },
   methods: {
     initPage () {
     },
     toLoginHandler () {
-      this.$router.push('/page/login')
+      this.$router.push({
+        path: '/page/tuiguang',
+        query: {
+          ...this.$router.history.current.query
+        }
+      })
     },
     logoutHandler () {
       this.$http.get('auth/logout', {token: window._token, platform: 'mobile'}).then((data) => {

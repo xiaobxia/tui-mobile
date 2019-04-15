@@ -8,7 +8,6 @@
 @import "component/cell";
 @import "component/field";
 @import "component/button";
-@import "component/toast";
 @import "component/messagebox";
 @import "component/radio";
 @import "component/mask";
@@ -19,8 +18,11 @@
 @import "component/product-card-simple";
 @import "tabViews/index";
 @import "tabViews/mine";
+@import "tabViews/loan";
 @import "page/login";
 @import "page/tui-guang";
+@import "page/page-about-us";
+@import "page/page-new-product";
 
 body {
   margin: 0;
@@ -106,4 +108,8 @@ ul {
   p {
     font-size: 40px;
   }
+}
+
+.white-block {
+  background-color: #fff;
 }

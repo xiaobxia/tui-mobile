@@ -59,7 +59,9 @@ export default {
         source_channel_id: query.cc || 'sys',
         mobile: userInfo.mobile || '-'
       })
-      window.location.href = item.url
+      setTimeout(() => {
+        window.location.href = item.url
+      }, 400)
     }
   }
 }

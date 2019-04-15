@@ -18,8 +18,12 @@
           </mt-tab-item>
           <mt-tab-item id="loan">
             <i class="far fa-credit-card" slot="icon"></i>
-            <span>借款</span>
+            <span>贷款大全</span>
           </mt-tab-item>
+          <!--<mt-tab-item id="suitable">-->
+            <!--<i class="fas fa-universal-access" slot="icon"></i>-->
+            <!--<span>量身定制</span>-->
+          <!--</mt-tab-item>-->
           <mt-tab-item id="mine">
             <i class="fas fa-user" slot="icon"></i>
             <span>我的</span>

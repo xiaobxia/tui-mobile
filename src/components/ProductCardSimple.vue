@@ -8,10 +8,13 @@
         <div class="title-wrap">
           <div class="name">
             <span class="app-name">{{item.name}}</span>
-            <span class="right">最快{{item.lending_time}}{{item.lending_time_unit}}放款</span>
+            <span v-if="type === 'new'" class="right">{{upDay(item)}}</span>
+            <span v-else-if="type === 'hot'" class="right"><span class="yellow-text">{{count(item)}}</span>人申请</span>
+            <span v-else-if="type === 'big'" class="right">最高额度<span class="yellow-text">{{item.max_quota}}</span>元</span>
+            <span v-else class="right">最快{{item.lending_time}}{{item.lending_time_unit}}放款</span>
           </div>
           <div class="link-wrap">
-            <span>优质小额现金贷，无需抵押</span>
+            <span class="introduction">{{item.introduction}}</span>
             <span class="link-tag">去申请借款</span>
           </div>
         </div>
@@ -36,21 +39,26 @@
   </div>
 </template>
 <script>
-
+import moment from 'moment'
 import storageUtil from '@/util/storageUtil.js'
 export default {
   name: 'ProductCard',
   data () {
     return {}
   },
-  computed: {},
   props: {
     list: {
       type: Array,
       default: function () {
         return []
       }
+    },
+    type: {
+      type: String,
+      default: 'normal'
     }
+  },
+  computed: {
   },
   mounted () {
   },
@@ -65,7 +73,26 @@ export default {
         source_channel_id: query.cc || 'sys',
         mobile: userInfo.mobile || '-'
       })
-      window.location.href = item.url
+      setTimeout(() => {
+        window.location.href = item.url
+      }, 400)
+    },
+    upDay (item) {
+      if (this.type === 'new' && item) {
+        const diff = moment().diff(item.create_at, 'days')
+        if (diff === 0) {
+          return '上架24小时以内'
+        } else {
+          return moment().diff(item.create_at, 'days') + '天前上架'
+        }
+      }
+    },
+    count (item) {
+      if (this.type === 'hot' && item) {
+        let count = item.history_click_count * 10
+        count = count + parseInt(Math.random() * 10)
+        return count
+      }
     }
   }
 }

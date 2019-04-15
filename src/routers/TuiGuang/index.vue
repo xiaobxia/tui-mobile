@@ -5,9 +5,10 @@
       <div class="register-wrap">
         <mt-field placeholder="请输入您的手机号"  v-model="mobile"></mt-field>
         <mt-field placeholder="请输入您的验证码" class="code-wrap"  v-model="verification_code">
-          <mt-button>发送验证码</mt-button>
+          <mt-button v-if="!ifCount" :disabled="sendDisabled" @click="sendMsg">发送验证码</mt-button>
+          <mt-button v-else :disabled="true">{{countNumber}}秒</mt-button>
         </mt-field>
-        <mt-button class="register-btn">立即注册</mt-button>
+        <mt-button class="register-btn" :disabled="registerDisabled" @click="loginIn">立即注册 / 登录</mt-button>
       </div>
     </div>
   </div>
@@ -16,24 +17,46 @@
 <script>
 import environmentUtil from '@/util/environmentUtil.js'
 import storageUtil from '@/util/storageUtil.js'
+import { Toast } from 'mint-ui'
 
 export default {
   name: 'TuiGuang',
   data () {
     return {
       mobile: '',
-      verification_code: ''
+      verification_code: '',
+      ifCount: false,
+      countNumber: 19,
+      codeToken: '',
+      countTimer: null
     }
   },
   created () {
     environmentUtil.createDeviceInfo()
     this.initPage()
   },
+  computed: {
+    registerDisabled () {
+      return !this.mobile || !this.verification_code
+    },
+    sendDisabled () {
+      return !this.mobile
+    }
+  },
+  beforeDestroy () {
+    clearInterval(this.countTimer)
+  },
   methods: {
+    getCodeToken () {
+      this.$http.get('auth/getVerificationCodeToken').then((res) => {
+        this.codeToken = res.data.token
+      })
+    },
     initPage () {
       const query = this.$router.history.current.query
       const deviceInfo = storageUtil.getDeviceInfo()
       const userInfo = storageUtil.getUserInfo()
+      this.getCodeToken()
       // 添加浏览记录
       this.$http.post('log/addViewLog', {
         ...deviceInfo,
@@ -41,6 +64,89 @@ export default {
         source_channel_id: query.cc || 'sys',
         mobile: userInfo.mobile
       })
+    },
+    loginIn () {
+      const query = this.$router.history.current.query
+      const phoneReg = /^1\d{10}$/
+      if (phoneReg.test(this.mobile)) {
+        const codeReg = /^\d{4}$/
+        if (codeReg.test(this.verification_code)) {
+          this.$http.post('auth/activeByVerificationCode', {
+            mobile: this.mobile,
+            code: this.verification_code,
+            source_channel_id: query.cc || 'sys'
+          }).then((res) => {
+            if (res.success === false) {
+              Toast({
+                message: '验证码不正确',
+                className: 'error',
+                duration: 1000
+              })
+            } else {
+              window._token = res.data.token
+              localStorage.setItem('token', res.data.token)
+              this.$router.push('/')
+              storageUtil.initUserInfo({
+                ...res.data,
+                isLogin: true
+              })
+            }
+          })
+        } else {
+          Toast({
+            message: '验证码格式不正确',
+            className: 'error',
+            duration: 1000
+          })
+        }
+      } else {
+        Toast({
+          message: '手机号格式不正确',
+          className: 'error',
+          duration: 1000
+        })
+      }
+    },
+    sendMsg () {
+      const query = this.$router.history.current.query
+      const phoneReg = /^1\d{10}$/
+      if (phoneReg.test(this.mobile)) {
+        this.$http.get('auth/sendVerificationCode', {
+          mobile: this.mobile,
+          token: this.codeToken,
+          source_channel_id: query.cc || 'sys'
+        }).then((res) => {
+          this.getCodeToken()
+          if (res.success === false) {
+            Toast({
+              message: '发生错误，请稍后重试',
+              className: 'error',
+              duration: 1000
+            })
+          } else {
+            Toast({
+              message: '发送成功',
+              className: 'success',
+              duration: 1000
+            })
+            this.ifCount = true
+            this.countTimer = setInterval(() => {
+              this.countNumber = this.countNumber - 1
+              if (this.countNumber === 0) {
+                this.ifCount = false
+                this.countNumber = 19
+                clearInterval(this.countTimer)
+              }
+            }, 1000)
+          }
+        })
+      } else {
+        Toast({
+          message: '手机号格式不正确',
+          className: 'error',
+          duration: 1000
+        })
+      }
     }
   }
 }

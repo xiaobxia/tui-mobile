@@ -1,6 +1,9 @@
 <template>
-  <div class="tab-view tab-view-loan">
-    <mt-header title="贷款大全" :fixed="true">
+  <div class="page-new-product">
+    <mt-header title="快速下款" :fixed="true">
+      <mt-button slot="left" @click="backHandler">
+        <i class="fas fa-chevron-left"></i>
+      </mt-button>
     </mt-header>
     <div class="main-body">
       <div class="ad-wrap">
@@ -11,12 +14,10 @@
     </div>
   </div>
 </template>
-
 <script>
-import storageUtil from '@/util/storageUtil.js'
 import ProductCardSimple from '@/components/ProductCardSimple.vue'
 export default {
-  name: 'Loan',
+  name: 'QuickProduct',
   data () {
     return {
       list: []
@@ -27,18 +28,21 @@ export default {
     this.initPage()
   },
   methods: {
+    backHandler () {
+      this.$router.history.go(-1)
+    },
     initPage () {
-      const query = this.$router.history.current.query
-      const deviceInfo = storageUtil.getDeviceInfo()
-      const userInfo = storageUtil.getUserInfo()
-      // 添加浏览记录
-      this.$http.post('log/addViewLog', {
-        ...deviceInfo,
-        page: 'loan',
-        source_channel_id: query.cc || 'sys',
-        mobile: userInfo.mobile
-      })
-      this.$http.get('customer/getUserProducts').then((res) => {
+      // const query = this.$router.history.current.query
+      // const deviceInfo = storageUtil.getDeviceInfo()
+      // const userInfo = storageUtil.getUserInfo()
+      // // 添加浏览记录
+      // this.$http.post('log/addViewLog', {
+      //   ...deviceInfo,
+      //   page: 'loan',
+      //   source_channel_id: query.cc || 'sys',
+      //   mobile: userInfo.mobile
+      // })
+      this.$http.get('customer/getProductsQuick').then((res) => {
         this.list = res.data.list
       })
     }

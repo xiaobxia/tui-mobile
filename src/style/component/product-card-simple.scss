@@ -4,11 +4,11 @@
   color: $main-text-color;
   position: relative;
   padding: 20px 0;
-  margin-top: 25px;
+  margin: 0;
   background-color: #fff;
-  box-shadow: 0 0 30px rgb(230,230,230);
+  box-shadow: 0 0 10px rgb(230,230,230);
   .main-wrap {
-    padding: 0 50px;
+    padding: 0 30px;
     .icon-wrap {
       display: inline-block;
       width: 94px;
@@ -23,10 +23,20 @@
     }
     margin-bottom: 15px;
   }
+  .yellow-text {
+    color: rgb(250,200,120);
+  }
   .link-wrap{
     line-height: 36px;
     font-size: 24px;
     margin-bottom: 20px;
+    .introduction {
+      display: inline-block;
+      width: 400px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
     .link-tag {
       line-height: 1.2;
       font-size: 22px;
@@ -40,7 +50,7 @@
   .title-wrap {
     display: inline-block;
     padding-left: 20px;
-    width: 500px;
+    width: 560px;
     vertical-align: top;
   }
   .name {

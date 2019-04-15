@@ -11,8 +11,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       "/tuiServer": {
-        // "target": "http://47.98.140.76:3010/"
-        "target": "http://localhost:3010/"
+        //"target": "http://47.92.210.171:3030/"
+        "target": "http://localhost:3030/"
       }
     },
 

@@ -1,0 +1,35 @@
+.page-about-us {
+  .main-body {
+    min-height: 70vh;
+  }
+  .ab-wrap {
+    margin-top: 150px;
+    .img-wrap {
+      text-align: center;
+    }
+    img {
+      display: inline-block;
+    }
+    h3 {
+      font-size: 32px;
+      text-align: center;
+    }
+    .content {
+      font-size: 28px;
+      padding: 0 35px;
+      word-break: break-all;
+    }
+  }
+  .business-wrap {
+    padding: 100px 35px;
+    font-size: 28px;
+    text-align: center;
+  }
+  .copyright {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+  }
+}

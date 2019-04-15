@@ -38,6 +38,38 @@ const routers = [
     }
   },
   {
+    name: 'NewProduct',
+    path: '/page/newProduct',
+    component: lazyLoading('NewProduct'),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    name: 'QuickProduct',
+    path: '/page/quickProduct',
+    component: lazyLoading('QuickProduct'),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    name: 'HotProduct',
+    path: '/page/hotProduct',
+    component: lazyLoading('HotProduct'),
+    meta: {
+      auth: false
+    }
+  },
+  {
+    name: 'BigProduct',
+    path: '/page/bigProduct',
+    component: lazyLoading('BigProduct'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     name: 'Login',
     path: '/page/login',
     component: lazyLoading('Login')
