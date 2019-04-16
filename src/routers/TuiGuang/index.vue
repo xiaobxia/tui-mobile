@@ -77,10 +77,15 @@ export default {
             } else {
               window._token = res.data.token
               localStorage.setItem('token', res.data.token)
-              this.$router.push('/')
               storageUtil.initUserInfo({
                 ...res.data,
                 isLogin: true
+              })
+              this.$router.push({
+                path: '/',
+                query: {
+                  ...this.$router.history.current.query
+                }
               })
             }
           })

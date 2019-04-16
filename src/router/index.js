@@ -23,7 +23,7 @@ const routers = [
   },
   {
     name: 'TuiGuang',
-    path: '/page/tuiGuang',
+    path: '/page/tuiguang',
     component: lazyLoading('TuiGuang'),
     meta: {
       auth: false

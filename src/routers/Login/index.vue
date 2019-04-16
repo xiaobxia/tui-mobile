@@ -39,10 +39,15 @@ export default {
         if (data.success) {
           window._token = data.data.token
           localStorage.setItem('token', data.data.token)
-          this.$router.push('/')
           storageUtil.initUserInfo({
             ...data.data,
             isLogin: true
+          })
+          this.$router.push({
+            path: '/',
+            query: {
+              ...this.$router.history.current.query
+            }
           })
           Toast.success('登录成功')
         } else {

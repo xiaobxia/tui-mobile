@@ -53,7 +53,7 @@ Vue.prototype.$addBaiDu = function (path, cc) {
     if (cc === localStorage.getItem(cc)) {
       channelName = localStorage.getItem(cc)
     } else {
-      return Http.get('channel/getChannel', {
+      return Http.get('customer/getChannel', {
         channel_id: cc
       }).then((res) => {
         channelName = res.data.channel_name
