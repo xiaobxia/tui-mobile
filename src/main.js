@@ -10,6 +10,7 @@ import '../static/web-fonts-with-css/css/fontawesome-all.css'
 import environmentUtil from './util/environmentUtil'
 import Http from '@/util/httpUtil.js'
 import store from './store'
+import storageUtil from '@/util/storageUtil.js'
 
 environmentUtil.setAdaptive()
 
@@ -19,6 +20,58 @@ Vue.use(VCharts)
 Vue.config.productionTip = false
 
 Vue.prototype.$http = Http
+
+Vue.prototype.$addViewLog = function (path, cc) {
+  environmentUtil.createDeviceInfo()
+  const deviceInfo = storageUtil.getDeviceInfo()
+  const userInfo = storageUtil.getUserInfo()
+  Http.post('log/addViewLog', {
+    ...deviceInfo,
+    page: path,
+    source_channel_id: cc || 'sys',
+    mobile: userInfo.mobile
+  })
+}
+
+const pathMap = {
+  '/mine': '我的',
+  '/home': '首页',
+  '/loan': '贷款大全',
+  '/page/tuiguang': '推广注册页',
+  '/page/aboutUs': '关于我们',
+  '/page/newProduct': '新品专区',
+  '/page/quickProduct': '极速下款',
+  '/page/hotProduct': '热门申请',
+  '/page/bigProduct': '大额低息',
+  '/page/downLoad': '下载页'
+}
+
+Vue.prototype.$addBaiDu = function (path, cc) {
+  const pathName = pathMap[path]
+  let channelName = '自然渠道'
+  if (cc) {
+    if (cc === localStorage.getItem(cc)) {
+      channelName = localStorage.getItem(cc)
+    } else {
+      return Http.get('channel/getChannel', {
+        channel_id: cc
+      }).then((res) => {
+        channelName = res.data.channel_name
+        localStorage.setItem(cc, channelName)
+        if (window._hmt) {
+          window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
+          window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
+          window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
+        }
+      })
+    }
+  }
+  if (window._hmt) {
+    window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
+    window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
+    window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
+  }
+}
 
 /* eslint-disable no-new */
 new Vue({

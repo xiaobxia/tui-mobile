@@ -93,6 +93,11 @@ export default {
       // after只有真正进入了页面才会执行
       this.$router.afterEach((transition) => {
         console.log('after')
+        console.log(transition)
+        // 百度统计
+        if (window._hmt && transition.path && transition.path !== '/' && transition.path !== '/page/tuiguang') {
+          this.$addBaiDu(transition.path, transition.query.cc)
+        }
         // 验证路由过去是否需要登录状态
         if (this.checkAuthPath(transition)) {
           const user = storageUtil.getUserInfo()

@@ -54,7 +54,6 @@
 
 <script>
 import ProductCardSimple from '@/components/ProductCardSimple.vue'
-import storageUtil from '@/util/storageUtil.js'
 
 function createAd (nameList) {
   nameList = nameList || ['']
@@ -88,15 +87,9 @@ export default {
   methods: {
     initPage () {
       const query = this.$router.history.current.query
-      const deviceInfo = storageUtil.getDeviceInfo()
-      const userInfo = storageUtil.getUserInfo()
       // 添加浏览记录
-      this.$http.post('log/addViewLog', {
-        ...deviceInfo,
-        page: 'home',
-        source_channel_id: query.cc || 'sys',
-        mobile: userInfo.mobile
-      })
+      this.$addBaiDu('/home', query.cc)
+      this.$addViewLog('/home', query.cc)
       this.$http.get('customer/getUserProducts', {
         is_recommend: true
       }).then((res) => {

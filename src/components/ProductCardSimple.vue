@@ -73,9 +73,16 @@ export default {
         source_channel_id: query.cc || 'sys',
         mobile: userInfo.mobile || '-'
       })
-      setTimeout(() => {
-        window.location.href = item.url
-      }, 400)
+      let channelName = '自然渠道'
+      if (query.cc && localStorage.getItem(query.cc)) {
+        channelName = localStorage.getItem(query.cc)
+      }
+      if (window._hmt) {
+        _hmt.push(['_trackEvent', channelName, '点击', item.name])
+      }
+      // setTimeout(() => {
+      //   window.location.href = item.url
+      // }, 400)
     },
     upDay (item) {
       if (this.type === 'new' && item) {

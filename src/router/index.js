@@ -70,6 +70,14 @@ const routers = [
     }
   },
   {
+    name: 'DownLoad',
+    path: '/page/downLoad',
+    component: lazyLoading('DownLoad'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     name: 'Login',
     path: '/page/login',
     component: lazyLoading('Login')

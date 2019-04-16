@@ -14,6 +14,11 @@
           <h3><i class="fas fa-users"></i>关于我们</h3>
         </div>
       </mt-cell-swipe>
+      <mt-cell-swipe v-if="!app" :to="'/page/downLoad'" is-link>
+        <div slot="title">
+          <h3><i class="fas fa-arrow-alt-circle-down"></i>下载客户端</h3>
+        </div>
+      </mt-cell-swipe>
     </div>
     <template v-if="!ifUser">
       <div class="btn-wrap">
@@ -38,11 +43,22 @@ export default {
     return {
       ifUser: user.isLogin === true,
       user: user,
-      mobile: user.isLogin === true ? user.mobile : '未登录'
+      mobile: user.isLogin === true ? user.mobile : '未登录',
+      app: false
     }
+  },
+  created () {
+    const query = this.$router.history.current.query
+    if (query.app && query.app === 'true') {
+      this.app = true
+    }
+    this.initPage()
   },
   methods: {
     initPage () {
+      const cc = this.$router.history.current.query.cc
+      this.$addBaiDu('/mine', cc)
+      this.$addViewLog('/mine', cc)
     },
     toLoginHandler () {
       this.$router.push({

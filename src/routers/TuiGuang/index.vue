@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import environmentUtil from '@/util/environmentUtil.js'
 import storageUtil from '@/util/storageUtil.js'
 import { Toast } from 'mint-ui'
 
@@ -32,7 +31,6 @@ export default {
     }
   },
   created () {
-    environmentUtil.createDeviceInfo()
     this.initPage()
   },
   computed: {
@@ -54,16 +52,10 @@ export default {
     },
     initPage () {
       const query = this.$router.history.current.query
-      const deviceInfo = storageUtil.getDeviceInfo()
-      const userInfo = storageUtil.getUserInfo()
       this.getCodeToken()
+      this.$addBaiDu('/page/tuiguang', query.cc)
       // 添加浏览记录
-      this.$http.post('log/addViewLog', {
-        ...deviceInfo,
-        page: 'register',
-        source_channel_id: query.cc || 'sys',
-        mobile: userInfo.mobile
-      })
+      this.$addViewLog('/page/tuiguang', query.cc)
     },
     loginIn () {
       const query = this.$router.history.current.query
