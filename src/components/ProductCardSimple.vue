@@ -88,9 +88,9 @@ export default {
       if (window._hmt) {
         _hmt.push(['_trackEvent', channelName, '点击', item.name])
       }
-      // setTimeout(() => {
-      //   window.location.href = item.url
-      // }, 400)
+      setTimeout(() => {
+        window.location.href = item.url
+      }, 400)
     },
     upDay (item) {
       if (this.type === 'new' && item) {
