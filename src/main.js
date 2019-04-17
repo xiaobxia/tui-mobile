@@ -21,15 +21,20 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = Http
 
-Vue.prototype.$addViewLog = function (path, cc) {
+Vue.prototype.$addViewLog = function (path, query) {
   environmentUtil.createDeviceInfo()
   const deviceInfo = storageUtil.getDeviceInfo()
   const userInfo = storageUtil.getUserInfo()
+  let app = 'false'
+  if (query.app && query.app === 'true') {
+    app = 'true'
+  }
   Http.post('log/addViewLog', {
     ...deviceInfo,
     page: path,
-    source_channel_id: cc || 'sys',
-    mobile: userInfo.mobile
+    source_channel_id: query.cc || 'sys',
+    mobile: userInfo.mobile,
+    has_app: app
   })
 }
 

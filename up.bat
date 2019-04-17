@@ -1,2 +1,2 @@
-tar zcf console-mobile.tar.gz -C ./dist .
-scp console-mobile.tar.gz root@47.98.140.76:/opt/www/
+tar zcf tui-mobile.tar.gz -C ./dist .
+scp tui-mobile.tar.gz root@47.92.210.171:/opt/www/

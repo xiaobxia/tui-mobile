@@ -69,7 +69,7 @@ export default {
       const userInfo = storageUtil.getUserInfo()
       if (!userInfo.mobile) {
         this.$router.push({
-          path: '/page/tuiguang',
+          path: '/page/login',
           query: {
             ...this.$router.history.current.query
           }

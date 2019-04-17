@@ -48,7 +48,6 @@
         <product-card-simple :list="list"></product-card-simple>
       </div>
     </div>
-    <a href="#/page/tuiguang">/page/tuiguang</a>
   </div>
 </template>
 
@@ -89,7 +88,7 @@ export default {
       const query = this.$router.history.current.query
       // 添加浏览记录
       this.$addBaiDu('/home', query.cc)
-      this.$addViewLog('/home', query.cc)
+      this.$addViewLog('/home', query)
       this.$http.get('customer/getUserProducts', {
         is_recommend: true
       }).then((res) => {

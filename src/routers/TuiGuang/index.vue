@@ -55,7 +55,7 @@ export default {
       this.getCodeToken()
       this.$addBaiDu('/page/tuiguang', query.cc)
       // 添加浏览记录
-      this.$addViewLog('/page/tuiguang', query.cc)
+      this.$addViewLog('/page/tuiguang', query)
     },
     loginIn () {
       const query = this.$router.history.current.query

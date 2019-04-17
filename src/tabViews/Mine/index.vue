@@ -56,13 +56,14 @@ export default {
   },
   methods: {
     initPage () {
-      const cc = this.$router.history.current.query.cc
+      const query = this.$router.history.current.query
+      const cc = query.cc
       this.$addBaiDu('/mine', cc)
-      this.$addViewLog('/mine', cc)
+      this.$addViewLog('/mine', query)
     },
     toLoginHandler () {
       this.$router.push({
-        path: '/page/tuiguang',
+        path: '/page/login',
         query: {
           ...this.$router.history.current.query
         }

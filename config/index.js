@@ -59,7 +59,7 @@ module.exports = {
     assetsPathInCss: '../../',
     // assetsPublicPath: './',
     assetsPublicPath: './',
-    cdnPublicPath: 'http://p6yy0m78z.bkt.clouddn.com/',
+    cdnPublicPath: 'http://pq311siw2.bkt.clouddn.com/',
     ifCdn: true,
     /**
      * Source Maps

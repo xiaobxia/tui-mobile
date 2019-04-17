@@ -67,6 +67,7 @@ export default {
   },
   components: {Index, Mine, Loan},
   created () {
+    this.checkSubPath(this.$router.history.current.path)
     environmentUtil.createDeviceInfo()
   },
   mounted () {
@@ -78,7 +79,6 @@ export default {
   methods: {
     initPage () {
       this.checkLogin()
-      this.checkSubPath(this.$router.history.current.path)
       // 刷新的时候before和after都不会执行
       this.$router.beforeEach((transition, from, next) => {
         console.log('before')
@@ -116,17 +116,42 @@ export default {
           })
           const user = storageUtil.getUserInfo()
           if (user.isLogin !== true && this.checkAuthPath()) {
-            this.$router.push('/page/login')
+            this.$router.push({
+              path: '/page/login',
+              query: {
+                ...this.$router.history.current.query
+              }
+            })
           }
         } else {
           storageUtil.initUserInfo({
             ...data.data,
             isLogin: true
           })
+          this.checkTuiGuang()
         }
-        console.log('in check login')
+        console.log('query login done')
         this.ifChecked = true
       })
+    },
+    checkTuiGuang () {
+      const user = storageUtil.getUserInfo()
+      if (user.isLogin === true) {
+        console.log('in checkTuiGuang')
+        // 慢一点
+        setTimeout(() => {
+          const current = this.$router.history.current
+          console.log(current)
+          if (current.path === '/page/tuiguang') {
+            this.$router.push({
+              path: '/',
+              query: {
+                ...this.$router.history.current.query
+              }
+            })
+          }
+        }, 300)
+      }
     },
     checkSubPath (path) {
       console.log('in check subPath')
@@ -177,7 +202,12 @@ export default {
     },
     checkUser (user, transition) {
       if (user.isLogin !== true) {
-        this.$router.push('/page/login')
+        this.$router.push({
+          path: '/page/login',
+          query: {
+            ...this.$router.history.current.query
+          }
+        })
       } else {
         const roles = this.checkPermissionPath(transition)
         if (roles) {
