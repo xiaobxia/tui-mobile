@@ -1,7 +1,8 @@
 <template>
   <div class="page-tui-guang">
     <img src="../../assets/bg.png" class="bg" alt="">
-    <div class="main-body">
+    <img src="../../assets/app-icon.png" alt="" class="app-icon">
+    <div class="main-body no-header">
       <div class="register-wrap">
         <mt-field placeholder="请输入您的手机号"  v-model="mobile"></mt-field>
         <mt-field placeholder="请输入您的验证码" class="code-wrap"  v-model="verification_code">
@@ -9,6 +10,23 @@
           <mt-button v-else :disabled="true">{{countNumber}}秒</mt-button>
         </mt-field>
         <mt-button class="register-btn" :disabled="registerDisabled" @click="loginIn">立即注册 / 登录</mt-button>
+      </div>
+      <div class="img-detail-wrap">
+        <div class="img-detail-item">
+          <img src="../../assets/img-detail-1.png" alt="">
+          <div class="text">超高额度</div>
+          <div class="text">极速放款</div>
+        </div>
+        <div class="img-detail-item">
+          <img src="../../assets/img-detail-2.png" alt="">
+          <div class="text">门槛极低</div>
+          <div class="text">免征信</div>
+        </div>
+        <div class="img-detail-item">
+          <img src="../../assets/img-detail-3.png" alt="">
+          <div class="text">信息安全</div>
+          <div class="text">借款无忧</div>
+        </div>
       </div>
     </div>
   </div>

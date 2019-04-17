@@ -54,10 +54,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $main-text-color;
+  position: relative;
 }
 
 .main-body {
   margin-top: 90px;
+  &.no-header {
+    margin-top: 0;
+  }
 }
 
 .tab-view {
