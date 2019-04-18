@@ -43,7 +43,7 @@ export default {
       mobile: '',
       verification_code: '',
       ifCount: false,
-      countNumber: 19,
+      countNumber: 29,
       codeToken: '',
       countTimer: null
     }
@@ -174,7 +174,7 @@ export default {
               this.countNumber = this.countNumber - 1
               if (this.countNumber === 0) {
                 this.ifCount = false
-                this.countNumber = 19
+                this.countNumber = 29
                 clearInterval(this.countTimer)
               }
             }, 1000)
