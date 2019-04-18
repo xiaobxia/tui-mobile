@@ -78,6 +78,14 @@ const routers = [
     }
   },
   {
+    name: 'AppDownload',
+    path: '/page/appDownload',
+    component: lazyLoading('AppDownload'),
+    meta: {
+      auth: false
+    }
+  },
+  {
     name: 'Login',
     path: '/page/login',
     component: lazyLoading('Login')

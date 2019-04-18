@@ -80,7 +80,7 @@ export default {
         ...deviceInfo,
         product_id: item._id,
         source_channel_id: query.cc || 'sys',
-        mobile: userInfo.mobile || '-'
+        mobile: userInfo.mobile
       })
       let channelName = '自然渠道'
       if (query.cc && localStorage.getItem(query.cc)) {

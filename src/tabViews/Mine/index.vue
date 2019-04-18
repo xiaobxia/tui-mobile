@@ -76,7 +76,9 @@ export default {
           storageUtil.initUserInfo({
             isLogin: false
           })
-          this.$store.dispatch('setTabSelect', 'index')
+          setTimeout(() => {
+            window.location.reload()
+          }, 200)
         } else {
         }
       })

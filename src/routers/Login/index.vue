@@ -102,7 +102,8 @@ export default {
               this.$router.push({
                 path: '/',
                 query: {
-                  ...this.$router.history.current.query
+                  ...this.$router.history.current.query,
+                  cc: res.data.channel_id
                 }
               })
             }

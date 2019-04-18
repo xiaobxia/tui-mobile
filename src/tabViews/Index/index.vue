@@ -53,6 +53,7 @@
 
 <script>
 import ProductCardSimple from '@/components/ProductCardSimple.vue'
+import storageUtil from '@/util/storageUtil.js'
 
 function createAd (nameList) {
   nameList = nameList || ['']
@@ -85,10 +86,16 @@ export default {
   },
   methods: {
     initPage () {
+      const userInfo = storageUtil.getUserInfo()
       const query = this.$router.history.current.query
       // 添加浏览记录
       this.$addBaiDu('/home', query.cc)
       this.$addViewLog('/home', query)
+      if (query.app && query.app === 'true' && userInfo.mobile) {
+        this.$http.get('customer/setHasApp', {
+          mobile: userInfo.mobile
+        })
+      }
       this.$http.get('customer/getUserProducts', {
         is_recommend: true
       }).then((res) => {

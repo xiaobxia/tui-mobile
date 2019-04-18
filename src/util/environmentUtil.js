@@ -61,11 +61,15 @@ const environmentUtil = {
       return '苹果'
     } else {
       const ua = window.navigator.userAgent.toLowerCase()
-      if (ua.match(/MicroMessenger/i) === 'micromessenger') {
+      if (ua.indexOf('micromessenger') !== -1) {
         return '微信'
       }
     }
     return '其他'
+  },
+  ifWechat () {
+    const ua = window.navigator.userAgent.toLowerCase()
+    return ua.indexOf('micromessenger') !== -1
   },
   createDeviceInfo () {
     const deviceInfo = storageUtil.getDeviceInfo()

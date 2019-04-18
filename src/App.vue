@@ -46,24 +46,13 @@ export default {
   data () {
     return {
       subPath: false,
-      ifChecked: false
+      ifChecked: false,
+      tabSelect: 'index'
     }
   },
   watch: {
-    tabSelect (val) {
-
-    }
   },
   computed: {
-    tabSelect: {
-      get () {
-        return this.$store.state.tabSelect
-      },
-      set (val) {
-        storageUtil.setAppConfig('homeTabSelect', val)
-        this.$store.dispatch('setTabSelect', val)
-      }
-    }
   },
   components: {Index, Mine, Loan},
   created () {

@@ -25,16 +25,11 @@ Vue.prototype.$addViewLog = function (path, query) {
   environmentUtil.createDeviceInfo()
   const deviceInfo = storageUtil.getDeviceInfo()
   const userInfo = storageUtil.getUserInfo()
-  let app = 'false'
-  if (query.app && query.app === 'true') {
-    app = 'true'
-  }
   Http.post('log/addViewLog', {
     ...deviceInfo,
     page: path,
     source_channel_id: query.cc || 'sys',
-    mobile: userInfo.mobile,
-    has_app: app
+    mobile: userInfo.mobile
   })
 }
 
@@ -53,17 +48,25 @@ const pathMap = {
 
 Vue.prototype.$addBaiDu = function (path, cc) {
   const pathName = pathMap[path]
-  let channelName = '自然渠道'
+  let channelName = ''
+  const userInfo = storageUtil.getUserInfo()
+  if (userInfo.isLogin === true && userInfo.channel_id) {
+    cc = userInfo.channel_id
+    channelName = userInfo.channel_name
+  }
+  // 没有渠道编码就不统计
   if (cc) {
-    if (cc === localStorage.getItem(cc)) {
-      channelName = localStorage.getItem(cc)
+    if (channelName) {
+      window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
+      window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
+      window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
     } else {
       return Http.get('customer/getChannel', {
         channel_id: cc
       }).then((res) => {
         channelName = res.data.channel_name
         localStorage.setItem(cc, channelName)
-        if (window._hmt) {
+        if (window._hmt && pathName) {
           window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
           window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
           window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
@@ -71,11 +74,12 @@ Vue.prototype.$addBaiDu = function (path, cc) {
       })
     }
   }
-  if (window._hmt) {
-    window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
-    window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
-    window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
-  }
+  // if (window._hmt && pathName) {
+  //   console.log('in')
+  //   window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
+  //   window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
+  //   window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
+  // }
 }
 
 /* eslint-disable no-new */

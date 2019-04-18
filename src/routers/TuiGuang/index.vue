@@ -34,7 +34,7 @@
 
 <script>
 import storageUtil from '@/util/storageUtil.js'
-import { Toast } from 'mint-ui'
+import { Toast, MessageBox } from 'mint-ui'
 
 export default {
   name: 'TuiGuang',
@@ -93,18 +93,43 @@ export default {
                 duration: 1000
               })
             } else {
-              window._token = res.data.token
-              localStorage.setItem('token', res.data.token)
-              storageUtil.initUserInfo({
-                ...res.data,
-                isLogin: true
-              })
-              this.$router.push({
-                path: '/',
-                query: {
-                  ...this.$router.history.current.query
-                }
-              })
+              if (query.h5 && query.h5 === 'true') {
+                window._token = res.data.token
+                localStorage.setItem('token', res.data.token)
+                storageUtil.initUserInfo({
+                  ...res.data,
+                  isLogin: true
+                })
+                this.$router.push({
+                  path: '/',
+                  query: {
+                    ...this.$router.history.current.query,
+                    cc: res.data.channel_id
+                  }
+                })
+              } else {
+                MessageBox({
+                  title: '提示',
+                  message: `你好，注册成功！请去下载app`,
+                  showCancelButton: true,
+                  confirmButtonText: '去下载'
+                }).then(action => {
+                  localStorage.removeItem('password')
+                  if (action === 'confirm') {
+                    this.$http.get('customer/setDownload', {
+                      mobile: res.data.mobile
+                    })
+                    this.$router.push({
+                      path: '/page/appDownload',
+                      query: {
+                        ...this.$router.history.current.query,
+                        cc: res.data.channel_id
+                      }
+                    })
+                  }
+                })
+              }
+              // 推广的链接不能直接跳转h5而是应该下载app
             }
           })
         } else {
