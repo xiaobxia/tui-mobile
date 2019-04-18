@@ -74,6 +74,7 @@ export default {
             ...this.$router.history.current.query
           }
         })
+        return
       }
       this.$http.post('log/addUrlClickLog', {
         ...deviceInfo,
