@@ -67,15 +67,16 @@ export default {
       const query = this.$router.history.current.query
       const deviceInfo = storageUtil.getDeviceInfo()
       const userInfo = storageUtil.getUserInfo()
-      if (!userInfo.mobile) {
-        this.$router.push({
-          path: '/page/login',
-          query: {
-            ...this.$router.history.current.query
-          }
-        })
-        return
-      }
+      // 第一版先不用这个功能
+      // if (!userInfo.mobile) {
+      //   this.$router.push({
+      //     path: '/page/login',
+      //     query: {
+      //       ...this.$router.history.current.query
+      //     }
+      //   })
+      //   return
+      // }
       this.$http.post('log/addUrlClickLog', {
         ...deviceInfo,
         product_id: item._id,
