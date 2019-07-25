@@ -24,10 +24,10 @@
             <!--<i class="fas fa-universal-access" slot="icon"></i>-->
             <!--<span>量身定制</span>-->
           <!--</mt-tab-item>-->
-          <mt-tab-item id="mine">
-            <i class="fas fa-user" slot="icon"></i>
-            <span>我的</span>
-          </mt-tab-item>
+          <!--<mt-tab-item id="mine">-->
+            <!--<i class="fas fa-user" slot="icon"></i>-->
+            <!--<span>我的</span>-->
+          <!--</mt-tab-item>-->
         </mt-tabbar>
       </template>
     </template>

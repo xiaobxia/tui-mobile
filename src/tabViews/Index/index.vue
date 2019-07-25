@@ -9,7 +9,7 @@
         <mt-swipe-item><img src="../../assets/banner15.png" alt=""></mt-swipe-item>
       </mt-swipe>
     </div>
-    <div class="entry-wrap">
+    <div class="entry-wrap" style="display: none">
       <div class="entry-item" @click="toHot">
         <div class="img-wrap red">
           <img src="../../assets/热门.png" alt="">
@@ -97,7 +97,8 @@ export default {
         })
       }
       this.$http.get('customer/getUserProducts', {
-        is_recommend: true
+        is_recommend: true,
+        platform: 2
       }).then((res) => {
         let list = res.data.list
         this.list = list
