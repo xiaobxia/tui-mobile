@@ -97,8 +97,8 @@ export default {
         })
       }
       this.$http.get('customer/getUserProducts', {
-        is_recommend: true,
-        platform: 2
+        platform: 2,
+        type: 1
       }).then((res) => {
         let list = res.data.list
         this.list = list

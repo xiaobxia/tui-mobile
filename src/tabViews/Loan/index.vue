@@ -31,7 +31,8 @@ export default {
       this.$addBaiDu('/loan', query.cc)
       this.$addViewLog('/loan', query)
       this.$http.get('customer/getUserProducts', {
-        platform: 2
+        platform: 2,
+        type: 2
       }).then((res) => {
         this.list = res.data.list
       })
