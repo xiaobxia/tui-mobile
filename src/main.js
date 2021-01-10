@@ -57,9 +57,9 @@ Vue.prototype.$addBaiDu = function (path, cc) {
   // 没有渠道编码就不统计
   if (cc) {
     if (channelName) {
-      window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
-      window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
-      window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
+      // window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
+      // window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
+      // window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
     } else {
       return Http.get('customer/getChannel', {
         channel_id: cc
@@ -67,9 +67,9 @@ Vue.prototype.$addBaiDu = function (path, cc) {
         channelName = res.data.channel_name
         localStorage.setItem(cc, channelName)
         if (window._hmt && pathName) {
-          window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
-          window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
-          window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
+          // window._hmt.push(['_trackPageview', `/${channelName}/${pathName}`])
+          // window._hmt.push(['_trackPageview', `/${channelName}/所有页面`])
+          // window._hmt.push(['_trackPageview', `/所有渠道/${pathName}`])
         }
       })
     }

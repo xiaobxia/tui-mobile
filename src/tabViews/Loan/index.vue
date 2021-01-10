@@ -30,10 +30,7 @@ export default {
       const query = this.$router.history.current.query
       this.$addBaiDu('/loan', query.cc)
       this.$addViewLog('/loan', query)
-      this.$http.get('customer/getUserProducts', {
-        platform: 2,
-        type: 2
-      }).then((res) => {
+      this.$http.get('customer/getUserProducts').then((res) => {
         this.list = res.data.list
       })
     }

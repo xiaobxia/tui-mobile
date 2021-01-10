@@ -15,7 +15,7 @@
       </div>
       <div class="business-wrap">
         <div class="business-item">
-          <span>商务合作邮箱：673806687@qq.com</span>
+          <span>商务合作邮箱：</span>
         </div>
       </div>
       <div class="copyright">copyright©2019上好口 All Rights Reserved</div>

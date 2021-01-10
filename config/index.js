@@ -11,8 +11,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       "/tuiServer": {
-        //"target": "http://47.92.210.171:3030/"
-        "target": "http://localhost:3030/"
+        "target": "http://8.136.27.152:3030/"
+        // "target": "http://localhost:3030/"
       }
     },
 
@@ -58,8 +58,8 @@ module.exports = {
     // 解决打包时font的问题
     assetsPathInCss: '../../',
     // assetsPublicPath: './',
-    assetsPublicPath: './',
-    cdnPublicPath: 'http://daimarketcdn.xiaobxia.com/',
+    assetsPublicPath: '/',
+    cdnPublicPath: 'http://tuimobilecdn.menghe.top/',
     ifCdn: true,
     /**
      * Source Maps

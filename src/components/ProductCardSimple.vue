@@ -88,7 +88,7 @@ export default {
         channelName = localStorage.getItem(query.cc)
       }
       if (window._hmt) {
-        _hmt.push(['_trackEvent', channelName, '点击', item.name])
+        // _hmt.push(['_trackEvent', channelName, '点击', item.name])
       }
       setTimeout(() => {
         window.location.href = item.url
