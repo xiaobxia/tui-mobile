@@ -1,142 +1,61 @@
-/**
- * Created by xiaobxia on 2018/5/3.
- */
-function formatKey (key) {
-  return `tuiMobile-${key}`
+function formatKey(key) {
+  return `vueMobileCli-${key}`
 }
-function localStorageGetItem (key) {
-  return localStorage.getItem(formatKey(key))
+function sessionStorageGetItem(key) {
+  return sessionStorage.getItem(formatKey(key))
 }
-function localStorageSetItem (key, data) {
-  return localStorage.setItem(formatKey(key), data)
+function sessionStorageSetItem(key, data) {
+  return sessionStorage.setItem(formatKey(key), data)
 }
-function localStorageRemoveItem (key) {
-  return localStorage.removeItem(formatKey(key))
+function sessionStorageRemoveItem(key) {
+  return sessionStorage.removeItem(formatKey(key))
 }
 const storageUtil = {
-  getAppConfig: function (key) {
-    let config = {}
-    if (window._appConfig) {
-      config = window._appConfig
+  getData: function(name, key) {
+    let value = {}
+    if (window[`_${name}`]) {
+      value = window[`_${name}`]
     } else {
-      const appConfigString = localStorageGetItem('appConfig')
-      if (appConfigString) {
-        config = JSON.parse(appConfigString)
+      const valueString = sessionStorageGetItem(name)
+      if (valueString) {
+        value = JSON.parse(valueString)
       }
-      window._appConfig = config
+      window[`_${name}`] = value
     }
     if (key) {
-      return config[key]
+      return value[key]
     }
-    return config
+    return value
   },
-  setAppConfig: function (key, value) {
-    let config = this.getAppConfig()
-    config[key] = value
-    window._appConfig = config
-    localStorageSetItem('appConfig', JSON.stringify(config))
-    return config
-  },
-  getUserInfo: function (key) {
-    let userInfo = {}
-    if (window._userInfo) {
-      userInfo = window._userInfo
+  setData: function(name, key, value) {
+    let data = this.getData(name)
+    if (typeof key === 'object') {
+      value = key
+      data = value
     } else {
-      const userInfoString = localStorageGetItem('userInfo')
-      if (userInfoString) {
-        userInfo = JSON.parse(userInfoString)
-      }
-      window._userInfo = userInfo
+      data[key] = value
     }
+    window[`_${name}`] = data
+    sessionStorageSetItem(name, JSON.stringify(data))
+    return data
+  },
+  clearAll: function() {
+    window.sessionStorage.clear()
+  },
+  sessionStorageRemoveItem,
+  setQueryCache: function(key, value) {
+    return sessionStorage.setItem('cache-' + key, value)
+  },
+  getQueryCache: function(key) {
+    return sessionStorage.getItem('cache-' + key)
+  },
+  clearQueryCache: function(key) {
     if (key) {
-      return userInfo[key]
-    }
-    return userInfo
-  },
-  setUserInfo: function (key, value) {
-    let userInfo = this.getUserInfo()
-    userInfo[key] = value
-    window._userInfo = userInfo
-    localStorageSetItem('userInfo', JSON.stringify(userInfo))
-    return userInfo
-  },
-  initUserInfo: function (info) {
-    window._userInfo = info
-    localStorageSetItem('userInfo', JSON.stringify(info))
-    return info
-  },
-  removeUserInfo: function () {
-    window._userInfo = null
-    localStorageRemoveItem('userInfo')
-  },
-  getDeviceInfo: function (key) {
-    let deviceInfo = {}
-    if (window._deviceInfo) {
-      deviceInfo = window._deviceInfo
+      return sessionStorage.removeItem('cache-' + key)
     } else {
-      const deviceInfoString = localStorageGetItem('deviceInfo')
-      if (deviceInfoString) {
-        deviceInfo = JSON.parse(deviceInfoString)
-      }
-      window._deviceInfo = deviceInfo
-    }
-    if (key) {
-      return deviceInfo[key]
-    }
-    return deviceInfo
-  },
-  setDeviceInfo: function (key, value) {
-    let deviceInfo = this.getDeviceInfo()
-    deviceInfo[key] = value
-    window._deviceInfo = deviceInfo
-    localStorageSetItem('deviceInfo', JSON.stringify(deviceInfo))
-    return deviceInfo
-  },
-  initDeviceInfo: function (info) {
-    window._deviceInfo = info
-    localStorageSetItem('deviceInfo', JSON.stringify(info))
-    return info
-  },
-  removeDeviceInfo: function () {
-    window._deviceInfo = null
-    localStorageRemoveItem('deviceInfo')
-  },
-  getSearchHistory: function (key) {
-    let searchHistory = {}
-    if (window._searchHistory) {
-      searchHistory = window._searchHistory
-    } else {
-      const searchHistoryString = localStorageGetItem('searchHistory')
-      if (searchHistoryString) {
-        searchHistory = JSON.parse(searchHistoryString)
-      }
-      window._searchHistory = searchHistory
-    }
-    if (key) {
-      return searchHistory[key]
-    }
-    return searchHistory
-  },
-  setSearchHistory: function (key, value) {
-    let searchHistory = this.getSearchHistory()
-    searchHistory[key] = value
-    window._searchHistory = searchHistory
-    localStorageSetItem('searchHistory', JSON.stringify(searchHistory))
-    return searchHistory
-  },
-  setQueryCache: function (key, value) {
-    return localStorageSetItem('cache-' + key, value)
-  },
-  getQueryCache: function (key) {
-    return localStorageGetItem('cache-' + key)
-  },
-  clearQueryCache: function (key) {
-    if (key) {
-      return localStorageRemoveItem('cache-' + key)
-    } else {
-      for (let itemKey in localStorage) {
-        if (itemKey.startsWith(formatKey('cache-'))) {
-          localStorage.removeItem(itemKey)
+      for (const itemKey in sessionStorage) {
+        if (itemKey.startsWith('cache-')) {
+          sessionStorage.removeItem(itemKey)
         }
       }
       return true

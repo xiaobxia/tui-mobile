@@ -1,23 +1,30 @@
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
-
+const proxyTable = require('./proxyTable')
 const path = require('path')
+
+const newProxyTable = {}
+for (const key in proxyTable) {
+  proxyTable[key].forEach((item)=>{
+    let row = {
+      target: item.url,
+      changeOrigin: true,
+      pathRewrite: {}
+    }
+    row.pathRewrite[`^/${key}`] = ''
+    newProxyTable[`/${key}/${item.base}`] = row
+  })
+}
 
 module.exports = {
   dev: {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-      "/tuiServer": {
-        "target": "http://8.136.27.152:3030/"
-        // "target": "http://localhost:3030/"
-      }
-    },
-
+    proxyTable: newProxyTable,
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 3001, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
@@ -49,18 +56,18 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, `../dist/${process.env.dist_name}/index.html`),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, `../dist/${process.env.dist_name}`),
     // assetsSubDirectory: 'static',
     assetsSubDirectory: '',
     // 解决打包时font的问题
     assetsPathInCss: '../../',
     // assetsPublicPath: './',
-    assetsPublicPath: '/',
-    cdnPublicPath: 'http://tuimobilecdn.menghe.top/',
-    ifCdn: true,
+    assetsPublicPath: '/villageH5/',
+    cdnPublicPath: 'http://p6yy0m78z.bkt.clouddn.com/',
+    ifCdn: false,
     /**
      * Source Maps
      */

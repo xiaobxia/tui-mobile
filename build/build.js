@@ -18,17 +18,17 @@ const ifCdn = process.env.NODE_ENV === 'production' && config.build.ifCdn;
 const spinner = ora('building for production...')
 spinner.start()
 if (ifCdn) {
-  // cdn.getCdnFileList().then((fileList) => {
-  //   if (!fileList.length) {
-  //     console.log('no file');
-  //     return;
-  //   }
-  //   cdn.deleteCdnFile(fileList.map((item) => {
-  //     return item.key;
-  //   })).then(() => {
-  //     console.log('all delete')
-  //   });
-  // });
+  cdn.getCdnFileList().then((fileList) => {
+    if (!fileList.length) {
+      console.log('no file');
+      return;
+    }
+    cdn.deleteCdnFile(fileList.map((item) => {
+      return item.key;
+    })).then(() => {
+      console.log('all delete')
+    });
+  });
 }
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
   if (err) throw err

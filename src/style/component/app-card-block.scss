@@ -1,0 +1,38 @@
+.app-card-block {
+  position: relative;
+  background: #fff;
+  box-shadow:0 2px 10px 0 rgba(0,0,0,0.05);
+  border-radius:4px;
+  padding: 12px;
+  margin-bottom: 10px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &.top {
+    padding-top: 24px;
+  }
+  &.bottom {
+    padding-bottom: 24px;
+  }
+  &.both {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .card-title {
+    color: #484848;
+    font-size:16px;
+    line-height:22px;
+    margin-bottom: 8px;
+  }
+  .lock-tag {
+    position: absolute;
+    z-index: 100;
+    bottom: -23px;
+    &:first-child {
+      left: 12px;
+    }
+    &:last-child {
+      right: 12px;
+    }
+  }
+}

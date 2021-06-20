@@ -1,0 +1,172 @@
+.van-button--primary, .van-button--default, .van-button--info {
+  border-radius:4px;
+}
+
+.van-button--default {
+  border-color: #DDDDDD;
+}
+
+.van-button--plain.van-button--primary.grey-btn {
+  color: #484848;
+  background-color: #E9E9E9;
+  border-color: #E9E9E9;
+}
+
+.van-button--normal {
+  height:36px;
+  line-height: 34px;
+  font-size: 16px;
+  .van-loading__spinner {
+    width: 28px!important;
+    height: 28px!important;
+  }
+}
+
+.van-button--small {
+  height:32px;
+  line-height: 30px;
+  font-size: 14px;
+  .van-loading__spinner {
+    width: 25px!important;
+    height: 25px!important;
+  }
+}
+
+.van-button--mini {
+  height:28px;
+  line-height: 26px;
+  font-size: 14px;
+  .van-loading__spinner {
+    width: 21px!important;
+    height: 21px!important;
+  }
+}
+
+.van-button--block {
+  height:44px;
+  line-height: 42px;
+  font-size: 17px;
+}
+
+.van-switch {
+  width:40px;
+  height:18px;
+  border: 2px solid #E9E9E9;
+  background-color: #E9E9E9;
+}
+
+.van-switch__node {
+  width:18px;
+  height:18px;
+  box-shadow: none;
+}
+
+.van-switch--on .van-switch__node {
+  -webkit-transform: translateX(22px);
+  transform: translateX(22px);
+}
+
+.van-nav-bar__title {
+  color: $dark-text-color !important;
+  font-size: 18px;
+}
+
+.van-nav-bar .van-icon {
+  color: $dark-text-color;;
+  font-size: 17px;
+}
+
+.van-hairline--bottom::after {
+  display: none;
+}
+
+.van-password-input {
+  margin: 0;
+}
+.van-password-input__security li {
+  border-bottom: 1px solid #979797;
+}
+
+.van-tabbar {
+  box-shadow:0 1px 0 0 rgba(31,31,31,0.09);
+}
+
+.van-search {
+  padding: 0;
+}
+
+.van-search__content {
+  background-color: rgb(240,240,240);
+  input {
+    &::-webkit-input-placeholder{
+      color:rgba(31,31,31,0.4);
+    }
+    &::-moz-placeholder{   /* Mozilla Firefox 19+ */
+      color:rgba(31,31,31,0.4);
+    }
+    &:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+      color:rgba(31,31,31,0.4);
+    }
+    &:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+      color:rgba(31,31,31,0.4);
+    }
+  }
+}
+
+.van-overlay {
+  background-color: rgba(0,0,0,.35);
+}
+
+.van-calendar__day {
+  border-radius:4px;
+  height: 53px;
+}
+.van-calendar__body {
+  height: calc(100vh - 120px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: none;
+}
+
+.van-step--vertical .van-step__line {
+  top: 15px;
+}
+.van-step__circle-container {
+  z-index: 100;
+}
+.van-step--vertical::after {
+  display: none;
+}
+
+.van-search__content {
+  height: 36px;
+}
+
+.van-tab__text-wrapper {
+  color: $lighter-text-color;
+}
+.van-tab--active {
+  .van-tab__text {
+    color: #484848;
+  }
+}
+.van-info {
+  background-color: transparent;
+  border-color: transparent;
+  color: $lighter-text-color;
+  right: -6px;
+  top: 4px;
+}
+.van-tabs__nav {
+  padding-bottom: 12px;
+}
+
+.p-tab-p {
+  .van-tabs__nav {
+    .van-tab:first-child {
+      .van-info {
+        color: red;
+      }
+    }
+  }
+}

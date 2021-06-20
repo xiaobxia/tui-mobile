@@ -1,0 +1,65 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "61397629",
+      "name": "shouye-a",
+      "font_class": "shouye-a",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "61397653",
+      "name": "wode-a",
+      "font_class": "wode-a",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "61397654",
+      "name": "touxiang",
+      "font_class": "touxiang",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "61397864",
+      "name": "guquanzhengguanli",
+      "font_class": "xingzhuangjiehe",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "61397865",
+      "name": "dengjishuguanli",
+      "font_class": "xingzhuang",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "61397998",
+      "name": "筛选",
+      "font_class": "shaixuan",
+      "unicode": "e75e",
+      "unicode_decimal": 59230
+    },
+    {
+      "icon_id": "61434910",
+      "name": "组织架构",
+      "font_class": "zuzhijiagou",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "61484004",
+      "name": "圆形",
+      "font_class": "circle",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    }
+  ]
+}

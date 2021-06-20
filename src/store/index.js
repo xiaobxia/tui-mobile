@@ -1,35 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import storageUtil from '@/util/storageUtil.js'
+import app from './modules/app'
+import permission from './modules/permission'
+import approval from './modules/approval'
+import user from './modules/user'
+import state from './state'
+import mutations from './mutations'
+import getters from './getters'
 
 Vue.use(Vuex)
 
-const defaultTab = 'index'
-
 const store = new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
-  state: {
-    tabSelect: storageUtil.getAppConfig('homeTabSelect') || defaultTab
+  state,
+  mutations,
+  modules: {
+    app,
+    permission,
+    user,
+    approval
   },
-  // getters就是state的计算属性
-  getters: {
-    // tabSelect: state => {
-    //   return state.tabSelect
-    // }
-  },
-  mutations: {
-    SET_TAB_SELECT: (state, data) => {
-      state.tabSelect = data
-    }
-  },
-  actions: {
-    setTabSelect ({commit}, data) {
-      return new Promise(resolve => {
-        commit('SET_TAB_SELECT', data)
-        resolve()
-      })
-    }
-  }
+  getters
 })
 
 export default store

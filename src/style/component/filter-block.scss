@@ -1,0 +1,49 @@
+.van-popup {
+  .f-w {
+    padding: 14px 16px;
+    .s-b {
+      margin-top: 20px;
+    }
+    .f-b-b {
+      margin-top: 10px;
+      width: 88px;
+      .van-button__content {
+        .van-button__text {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+    .has-left {
+      margin-left: 6px;
+    }
+  }
+  .f-t {
+    margin-top: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height:14px;
+    &:before {
+      content: '';
+      display: inline-block;
+      vertical-align: top;
+      width:4px;
+      height:14px;
+      background: $theme-color;
+      border-radius:3px;
+      margin-right: 5px;
+    }
+  }
+  .b-b-w {
+    position: absolute;
+    bottom: 14px;
+    left: 16px;
+    .b-b-i {
+      width: 138px;
+      &:last-child {
+        margin-left: 4px;
+      }
+    }
+  }
+}

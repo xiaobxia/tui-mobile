@@ -1,12 +1,13 @@
 <template>
   <div class="page-404">
-    <mt-header title="404" :fixed="true">
-      <mt-button slot="left" @click="backHandler">
-        <i class="fas fa-chevron-left"></i>
-      </mt-button>
-    </mt-header>
-    <div class="main-body">
-      <h1>404</h1>
+    <van-nav-bar
+      title="404"
+      left-arrow
+      @click-left="onClickLeft"
+    />
+    <van-empty image="network" description=""/>
+    <div style="text-align: center">
+      <van-button type="info" size="small" class="b-b" @click="toHome">返回首页</van-button>
     </div>
   </div>
 </template>
@@ -14,13 +15,19 @@
 <script>
 export default {
   name: 'NotMatch',
-  data () {
+  data() {
     return {
     }
   },
   methods: {
-    backHandler () {
+    backHandler() {
       this.$router.history.go(-1)
+    },
+    onClickLeft() {
+      this.$router.history.go(-1)
+    },
+    toHome() {
+      this.$router.replace('/index')
     }
   }
 }
@@ -28,4 +35,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .b-b {
+    width: 100px;
+  }
 </style>

@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const replace = require('gulp-replace');
 const gulpif = require('gulp-if');
 const srcFiles = [
-  './src/style/libRaw/*.css'
+  './src/style/vant-raw/*.css'
 ];
 gulp.task('doublepx', function(done){
   gulp.src(srcFiles)
@@ -13,8 +13,7 @@ gulp.task('doublepx', function(done){
       }
       return ( parseInt(pixel) * 2 ) + 'px';
     })))
-    .pipe(gulp.dest('./src/style/lib'));
+    .pipe(gulp.dest('./src/style/vant'));
   done();
 });
 gulp.task('default', ['doublepx']);
-

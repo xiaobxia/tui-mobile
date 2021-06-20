@@ -1,49 +1,43 @@
 @charset "UTF-8";
 
 @import "_var";
-@import "lib/mint";
-@import "component/header";
-@import "component/tabbar";
-@import "component/switch";
-@import "component/cell";
-@import "component/field";
-@import "component/button";
-@import "component/messagebox";
-@import "component/radio";
-@import "component/mask";
-@import "component/bottom-bar";
-@import "component/search";
-@import "component/indicator";
-@import "component/product-card";
-@import "component/product-card-simple";
-@import "tabViews/index";
-@import "tabViews/mine";
-@import "tabViews/loan";
+@import "vant/index.css";
+@import "style-class";
+@import "vant-reset";
+@import "./theme/project-theme";
+@import "./font/icon/iconfont.css";
+
+@import "./component/app-card-block";
+@import "./component/filter-block";
+@import "./component/diy-form";
+
 @import "page/login";
-@import "page/tui-guang";
-@import "page/page-about-us";
-@import "page/page-new-product";
-@import "page/page-app-download";
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   background-color: $body-color;
-  font-size: 30px;
+  font-size: 13px;
+  // 全站灰色
+  // filter: grayscale(100%);
 }
 
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px
+  width: 4px;
+  height: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #bebdbd;
-  border-radius: 4px
+  border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #666;
-  opacity: .5
+  opacity: .5;
 }
 
 ::-webkit-scrollbar-track-piece:decrement, ::-webkit-scrollbar-track-piece:increment {
@@ -55,14 +49,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $main-text-color;
-  position: relative;
 }
 
 .main-body {
   margin-top: 90px;
-  &.no-header {
-    margin-top: 0;
-  }
 }
 
 .tab-view {
@@ -99,11 +89,12 @@ ul {
 }
 
 .content {
-  padding: 20px;
+  padding: 30px;
   font-size: 30px;
 }
 
 .loading-wrap {
+  width: 400px;
   margin-top: 400px;
   text-align: center;
   color: $lighter-text-color;
@@ -115,6 +106,107 @@ ul {
   }
 }
 
-.white-block {
-  background-color: #fff;
+.page-content-wrap {
+  padding: 0 24px;
 }
+
+.fake-input {
+  box-sizing: border-box;
+  height: 36px;
+  border-radius: 4px;
+  line-height: 36px;
+  padding: 0 12px;
+  color: #1F1F1F;
+  background-color: rgb(240,240,240);
+  overflow: hidden;
+}
+
+table {
+  border-color: #E9E9E9;
+  th {
+    padding: 11px 4px;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 20px;
+    background-color: $grey-body-color;
+  }
+  td {
+    padding: 11px 4px;
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+.common-view-wrap {
+  height: calc(100vh - 46px);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.common-info-block {
+  background-color: #fff;
+  padding: 10px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 21px;
+}
+
+.common-block {
+  background-color: #fff;
+  padding: 16px;
+}
+
+.sum-cell {
+  font-size: 16px;
+  font-weight: bold;
+  .van-cell__right-icon {
+    opacity: 0;
+  }
+}
+
+.page-grey-bg {
+  height: calc(100vh - 46px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: $grey-body-color;
+}
+
+.view-loading-wrap {
+  position: relative;
+}
+
+
+.col-title {
+  padding: 14px 15px;
+  line-height: 12px;
+  .col-title-content {
+    padding-left: 5px;
+    border-left: 2px solid #255BDA;
+    color: #255BDA;
+  }
+}
+.col-content {
+  background-color: #fff;
+  padding: 15px;
+  line-height: 20px;
+  .col-label {
+    color: #808DA1
+  }
+  .col-item {
+    margin-bottom: 8px;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+
+.h-n-b {
+  width: 260px;
+  .van-notice-bar {
+    color: #272727 !important;
+    background-color: #fff;
+    font-size: 18px;
+  }
+}
+

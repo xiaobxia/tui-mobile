@@ -1,8 +1,8 @@
-function getIndex (target, filterModel) {
+function getIndex(target, filterModel) {
   for (let i = 0; i < target.length; i++) {
     const item = target[i]
     let same = true
-    for (let key in filterModel) {
+    for (const key in filterModel) {
       if (filterModel[key] !== item[key]) {
         same = false
         break
@@ -14,26 +14,28 @@ function getIndex (target, filterModel) {
   }
 }
 const arrayUtil = {
-  findObjectItem (array, keyName, keyValue) {
+  // 查找对象数据的项
+  findObjectItem(array, keyName, keyValue) {
     for (let k = 0, len = array.length; k < len; k++) {
       if (array[k][keyName] === keyValue) {
         return array[k]
       }
     }
   },
-  removeObjectItem (array, keyName, keyValue) {
+  // 移除对象数据的项
+  removeObjectItem(array, keyName, keyValue) {
     for (let i = 0; i < array.length; i++) {
-      let item = array[i]
+      const item = array[i]
       if (item[keyName] === keyValue) {
         array.splice(i, 1)
         break
       }
     }
   },
-  findIndex (target, filterModel) {
+  findIndex(target, filterModel) {
     return getIndex(target, filterModel)
   },
-  findOne (target, filterModel) {
+  findOne(target, filterModel) {
     return target[getIndex(target, filterModel)]
   }
 }

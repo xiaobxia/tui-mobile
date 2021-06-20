@@ -1,9 +1,6 @@
-import uuidv1 from 'uuid/v1'
-import storageUtil from '@/util/storageUtil.js'
-
 const environmentUtil = {
-  setAdaptive () {
-    let baseFontSize = 20
+  setAdaptive() {
+    const baseFontSize = 37.5
     // 和width有关
     let winWidth = 0
     let winHeight = 0
@@ -22,18 +19,18 @@ const environmentUtil = {
       winWidth = document.documentElement.clientWidth
       winHeight = document.documentElement.clientHeight
     }
-    let fontScale = winWidth / 375
-    let ua = navigator.userAgent
-    let matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i)
-    let UCversion = ua.match(/U3\/((\d+|\.){5,})/i)
-    let isUCHd = UCversion && parseInt(UCversion[1].split('.').join(''), 10) >= 80
-    let isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi)
+    const fontScale = winWidth / (375 / 2)
+    const ua = navigator.userAgent
+    const matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i)
+    const UCversion = ua.match(/U3\/((\d+|\.){5,})/i)
+    const isUCHd = UCversion && parseInt(UCversion[1].split('.').join(''), 10) >= 80
+    const isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi)
     let dpr = window.devicePixelRatio || 1
     if (!isIos && !(matches && matches[1] > 534) && !isUCHd) {
       // 如果非iOS, 非Android4.3以上, 非UC内核, 就不执行高清, dpr设为1;
       dpr = 1
     }
-    let scale = 1 / dpr
+    const scale = 1 / dpr
     let metaEl = document.querySelector('meta[name="viewport"]')
     if (!metaEl) {
       metaEl = document.createElement('meta')
@@ -43,40 +40,15 @@ const environmentUtil = {
     metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale)
     document.documentElement.style.fontSize = (baseFontSize / 2 * dpr * fontScale) + 'px'
     document.documentElement.setAttribute('data-dpr', dpr)
-    let fontSize = baseFontSize / 2 * dpr * fontScale
+    const fontSize = baseFontSize / 2 * dpr * fontScale
     window.adaptive = {
       winHeight: winHeight,
       winWidth: winWidth,
       dpr: dpr,
       fontSize: fontSize,
       baseFontSize: baseFontSize,
-      zoom: fontSize / 20
+      zoom: fontSize / baseFontSize
     }
-  },
-  getDeviceType () {
-    const u = navigator.userAgent
-    if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
-      return '安卓'
-    } else if (u.indexOf('iPhone') > -1) {
-      return '苹果'
-    } else {
-      const ua = window.navigator.userAgent.toLowerCase()
-      if (ua.indexOf('micromessenger') !== -1) {
-        return '微信'
-      }
-    }
-    return '其他'
-  },
-  ifWechat () {
-    const ua = window.navigator.userAgent.toLowerCase()
-    return ua.indexOf('micromessenger') !== -1
-  },
-  createDeviceInfo () {
-    const deviceInfo = storageUtil.getDeviceInfo()
-    if (!deviceInfo.device_id) {
-      storageUtil.setDeviceInfo('device_id', uuidv1())
-    }
-    storageUtil.setDeviceInfo('device_type', this.getDeviceType())
   }
 }
 

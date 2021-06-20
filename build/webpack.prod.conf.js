@@ -11,9 +11,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ifCdn = process.env.NODE_ENV === 'production' && config.build.ifCdn;
-const env = process.env.NODE_ENV === 'testing'
-  ? require('../config/test.env')
-  : require('../config/prod.env')
+
+const env = require('../config/' + process.env.env_config + '.env')
+
+function resolve(dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -36,8 +39,12 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': env
     }),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /^\.\/(zh-cn)$/i),
     new UglifyJsPlugin({
       uglifyOptions: {
+        output:{
+          comments:false
+        },
         compress: {
           warnings: false
         }
@@ -71,6 +78,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         : config.build.index,
       template: 'index.html',
       inject: true,
+      favicon: resolve('favicon.ico'),
       minify: {
         removeComments: true,
         collapseWhitespace: true,

@@ -1,11 +1,11 @@
 <template>
   <div class="page-logo">
-    <mt-header title="Logo" :fixed="true">
+    <mt-header :fixed="true" title="Logo">
       <mt-button slot="left">
-        <i class="fas fa-chevron-left"></i>
+        <i class="fas fa-chevron-left"/>
       </mt-button>
       <mt-button slot="right">
-        <i class="fas fa-plus"></i>
+        <i class="fas fa-plus"/>
       </mt-button>
     </mt-header>
     <div class="main-body">
@@ -17,7 +17,7 @@
 <script>
 export default {
   name: 'Wheel',
-  data () {
+  data() {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
