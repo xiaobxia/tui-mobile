@@ -56,18 +56,18 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, `../dist/${process.env.dist_name}/index.html`),
+    index: path.resolve(__dirname, `../dist/index.html`),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, `../dist/${process.env.dist_name}`),
+    assetsRoot: path.resolve(__dirname, `../dist`),
     // assetsSubDirectory: 'static',
     assetsSubDirectory: '',
     // 解决打包时font的问题
     assetsPathInCss: '../../',
     // assetsPublicPath: './',
-    assetsPublicPath: '/villageH5/',
-    cdnPublicPath: 'http://p6yy0m78z.bkt.clouddn.com/',
-    ifCdn: false,
+    assetsPublicPath: './',
+    cdnPublicPath: 'http://daimarketcdn.xiaobxia.com/',
+    ifCdn: true,
     /**
      * Source Maps
      */

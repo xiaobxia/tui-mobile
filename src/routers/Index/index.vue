@@ -1,49 +1,37 @@
 <template>
   <div class="page-index">
     <div>
-      <keep-alive :include="keepaliveNames">
-        <router-view :key="key"/>
-      </keep-alive>
+      <router-view/>
     </div>
     <van-tabbar v-model="active">
-      <!--<van-tabbar-item-->
-      <!--name="/index/home"-->
-      <!--@click="toPath('/index/home')"-->
-      <!--&gt;-->
-      <!--<span>首页</span>-->
-      <!--<template #icon="props">-->
-      <!--<img v-if="props.active" src="../../assets/tabbarIcon/home-a.png" >-->
-      <!--<img v-else src="../../assets/tabbarIcon/home-n.png" >-->
-      <!--</template>-->
-      <!--</van-tabbar-item>-->
+      <van-tabbar-item
+        name="/index/home"
+        @click="toPath('/index/home')"
+      >
+        <span>首页</span>
+        <template #icon="props">
+          <img v-if="props.active" src="../../assets/tabbarIcon/首页-a.png" >
+          <img v-else src="../../assets/tabbarIcon/首页.png" >
+        </template>
+      </van-tabbar-item>
       <van-tabbar-item
         name="/index/approval"
         @click="toPath('/index/approval')"
       >
-        <span>审批</span>
+        <span>贷款</span>
         <template #icon="props">
-          <img v-if="props.active" src="../../assets/tabbarIcon/approval-a.png" >
-          <img v-else src="../../assets/tabbarIcon/approval-n.png" >
+          <img v-if="props.active" src="../../assets/tabbarIcon/贷款-a.png" >
+          <img v-else src="../../assets/tabbarIcon/贷款.png" >
         </template>
       </van-tabbar-item>
-      <!--<van-tabbar-item-->
-      <!--name="/index/villageSentiment"-->
-      <!--@click="toPath('/index/villageSentiment')"-->
-      <!--&gt;-->
-      <!--<span>村情</span>-->
-      <!--<template #icon="props">-->
-      <!--<img v-if="props.active" src="../../assets/tabbarIcon/v-a.png" >-->
-      <!--<img v-else src="../../assets/tabbarIcon/v-n.png" >-->
-      <!--</template>-->
-      <!--</van-tabbar-item>-->
       <van-tabbar-item
         name="/index/my"
         @click="toPath('/index/my')"
       >
         <span>我的</span>
         <template #icon="props">
-          <img v-if="props.active" src="../../assets/tabbarIcon/mine-a.png" >
-          <img v-else src="../../assets/tabbarIcon/mine-n.png" >
+          <img v-if="props.active" src="../../assets/tabbarIcon/我的-a.png" >
+          <img v-else src="../../assets/tabbarIcon/我的.png" >
         </template>
       </van-tabbar-item>
     </van-tabbar>
