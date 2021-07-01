@@ -1,6 +1,42 @@
 <template>
   <div class="view-home">
-    <div>2222</div>
+    <van-nav-bar title="随借花" />
+    <div class="tag-wrap">
+      <van-row>
+        <van-col span="6">
+          <div class="tag-item">
+            <div class="i-w" style="background-color: rgb(95,160,255)">
+              <img src="../../../assets/home/盾牌.png" alt="">
+            </div>
+            <div class="i-t">黑名单检测</div>
+          </div>
+        </van-col>
+        <van-col span="6">
+          <div class="tag-item">
+            <div class="i-w" style="background-color: rgb(255,205,100)">
+              <img src="../../../assets/home/快.png" alt="">
+            </div>
+            <div class="i-t">下款快</div>
+          </div>
+        </van-col>
+        <van-col span="6">
+          <div class="tag-item">
+            <div class="i-w" style="background-color: rgb(255,115,100)">
+              <img src="../../../assets/home/通过.png" alt="">
+            </div>
+            <div class="i-t">通过率高</div>
+          </div>
+        </van-col>
+        <van-col span="6">
+          <div class="tag-item">
+            <div class="i-w" style="background-color: rgb(200,120,255)">
+              <img src="../../../assets/home/贷款.png" alt="">
+            </div>
+            <div class="i-t">极速放款</div>
+          </div>
+        </van-col>
+      </van-row>
+    </div>
     <div class="top-block">
       <div class="t-b-title">
         <img src="../../../assets/home/ai.png" alt="">
@@ -73,10 +109,16 @@ export default {
     margin-right: 10px;
   }
   .top-block {
-    margin: 10px 0;
+    margin: 8px 0;
     background-color: #fff;
     padding: 15px 0;
     text-align: center;
+    /deep/ {
+      .van-tag{
+        position: relative;
+        top: -0.1em;
+      }
+    }
     .t-b-title {
       text-align: center;
       line-height: 24px;
@@ -105,7 +147,7 @@ export default {
     }
   }
   .item-l {
-    margin: 10px 0;
+    margin: 8px 0;
   }
   .item-c {
     padding: 0 15px;
@@ -128,6 +170,29 @@ export default {
       .t-t{
         font-size: 16px;
         color: #000;
+      }
+    }
+  }
+  .tag-wrap {
+    padding: 10px 0;
+    background-color: #fff;
+    .tag-item {
+      text-align: center;
+      .i-w {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        border-radius: 16px;
+        text-align: center;
+        line-height: 50px;
+        img{
+          height: 30px;
+          width: 30px;
+          vertical-align: middle;
+        }
+      }
+      .i-t {
+        margin-top: 10px;
       }
     }
   }
