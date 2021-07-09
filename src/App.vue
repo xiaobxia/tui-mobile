@@ -7,9 +7,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { mapGetters } from 'vuex'
-import storageUtil from '@/util/storageUtil'
 
 export default {
   name: 'App',
@@ -24,21 +22,21 @@ export default {
   },
   watch: {},
   created() {
-    console.log('App-render')
-    const userInfo = storageUtil.getData('UserInfo') || {}
-    const orgInfo = storageUtil.getData('orgInfo') || {}
-    Vue.prototype.$commonQueryParam = {
-      ...(Vue.prototype.$commonQueryParam || {}),
-      phCreator: userInfo.userName,
-      phEditorId: '',
-      phEditorName: '',
-      phUserId: '' + userInfo.phid,
-      creator: '' + userInfo.phid,
-      phCurorgid: orgInfo.phid,
-      orgCode: orgInfo.encode,
-      orgId: orgInfo.phid,
-      orgName: orgInfo.name
-    }
+    // console.log('App-render')
+    // const userInfo = storageUtil.getData('UserInfo') || {}
+    // const orgInfo = storageUtil.getData('orgInfo') || {}
+    // Vue.prototype.$commonQueryParam = {
+    //   ...(Vue.prototype.$commonQueryParam || {}),
+    //   phCreator: userInfo.userName,
+    //   phEditorId: '',
+    //   phEditorName: '',
+    //   phUserId: '' + userInfo.phid,
+    //   creator: '' + userInfo.phid,
+    //   phCurorgid: orgInfo.phid,
+    //   orgCode: orgInfo.encode,
+    //   orgId: orgInfo.phid,
+    //   orgName: orgInfo.name
+    // }
   },
   mounted() {
     if (process.env.ENV_CONFIG === 'dingding') {

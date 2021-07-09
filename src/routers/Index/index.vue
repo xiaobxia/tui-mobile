@@ -15,8 +15,8 @@
         </template>
       </van-tabbar-item>
       <van-tabbar-item
-        name="/index/approval"
-        @click="toPath('/index/approval')"
+        name="/index/loan"
+        @click="toPath('/index/loan')"
       >
         <span>贷款</span>
         <template #icon="props">

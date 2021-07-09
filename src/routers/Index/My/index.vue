@@ -1,6 +1,6 @@
 <template>
   <div class="page-my">
-    <van-nav-bar title="村级事务" />
+    <van-nav-bar title="我的" />
     <div class="banner">
       <div class="tu">
         <img src="../../../assets/user-n.png" alt >
@@ -12,7 +12,7 @@
       </div>
     </div>
     <!--<van-cell is-link @click="toPath('mine-management')">首页管理</van-cell>-->
-    <van-cell is-link @click="toPath('mine-approvalSettings')">审批设置</van-cell>
+    <van-cell is-link>关于我们</van-cell>
     <div class="l-w">
       <van-button type="primary" block class="l-o" @click="logout">退出登录</van-button>
     </div>

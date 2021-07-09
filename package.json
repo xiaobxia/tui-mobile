@@ -13,7 +13,8 @@
     "lint": "eslint --fix --ext .js,.vue src",
     "build:prod": "cross-env NODE_ENV=production env_config=prod dist_name=prod node build/build.js",
     "build:dingding": "cross-env NODE_ENV=production env_config=dingding dist_name=dingding node build/build.js",
-    "build:all": "npm run build:prod && npm run build:dingding"
+    "build:all": "npm run build:prod && npm run build:dingding",
+    "build:report": "cross-env NODE_ENV=production env_config=prod npm_config_report=true node build/build.js"
   },
   "pre-commit": [
     "lint"

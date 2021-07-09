@@ -1,90 +1,29 @@
 <template>
   <div class="view-home">
-    <van-nav-bar title="随借花" />
-    <van-swipe :autoplay="3000" class="my-swipe" indicator-color="white">
-      <van-swipe-item v-for="(item, index) in rList" :key="index">
-        <div class="top-block">
-          <div class="t-b-title">
-            <img :src="item.icon_url" alt="">
-            <span class="t-t">{{ item.name }}</span>
-            <van-tag color="#ffe1e1" text-color="#ad0000">申请最多</van-tag>
-          </div>
-          <van-divider>
-            <div class="sub-e">日息低至{{ item.daily_rate }}% | 最长可分{{ item.max_term }}个月</div>
-          </van-divider>
-          <div class="money-t">{{ item.min_quota }} - {{ item.max_quota }}</div>
-          <div class="b-button">
-            <van-button round block type="info" @click="toHandler(item)">立即申请</van-button>
-          </div>
-        </div>
-      </van-swipe-item>
-    </van-swipe>
-    <div class="tag-wrap">
-      <van-row>
-        <van-col span="6">
-          <div class="tag-item">
-            <div class="i-w" style="background-color: rgb(95,160,255)">
-              <img src="../../../assets/home/盾牌.png" alt="">
-            </div>
-            <div class="i-t">黑名单检测</div>
-          </div>
-        </van-col>
-        <van-col span="6">
-          <div class="tag-item">
-            <div class="i-w" style="background-color: rgb(255,205,100)">
-              <img src="../../../assets/home/快.png" alt="">
-            </div>
-            <div class="i-t">下款快</div>
-          </div>
-        </van-col>
-        <van-col span="6">
-          <div class="tag-item">
-            <div class="i-w" style="background-color: rgb(255,115,100)">
-              <img src="../../../assets/home/通过.png" alt="">
-            </div>
-            <div class="i-t">通过率高</div>
-          </div>
-        </van-col>
-        <van-col span="6">
-          <div class="tag-item">
-            <div class="i-w" style="background-color: rgb(200,120,255)">
-              <img src="../../../assets/home/贷款.png" alt="">
-            </div>
-            <div class="i-t">极速放款</div>
-          </div>
-        </van-col>
-      </van-row>
-    </div>
-    <van-notice-bar color="#000" background="#FAFAF0">
-      <img
-        slot="left-icon"
-        src="../../../assets/home/礼物.png"
-        class="n-b-i"
-        alt=""
-      >
-      <span>建议申请两个产品以上 <span style="color: #ed6a0c">通过率可达90%</span></span>
-    </van-notice-bar>
+    <van-nav-bar title="贷款超市" />
     <div class="item-l">
       <div v-for="(item, index) in list" :key="index" class="item-c">
         <div class="item-title">
           <img :src="item.icon_url" alt="">
           <span class="t-t">{{ item.name }}</span>
-          <!--<span style="float: right;color: #bbb">1090808人下款</span>-->
         </div>
         <div class="item-detail">
           <van-row>
             <van-col span="15">
-              <div class="i-text">
-                <van-row>
-                  <van-col span="14">
+              <van-row>
+                <van-col span="15">
+                  <div class="i-text">
                     <div class="money-t">{{ item.min_quota }} - {{ item.max_quota }}</div>
-                  </van-col>
-                  <van-col span="10">
+                  </div>
+                  <div class="sub-e">额度(元)</div>
+                </van-col>
+                <van-col span="9">
+                  <div class="i-text">
                     <div class="month">{{ item.min_term }} ~ {{ item.max_term }} 月</div>
-                  </van-col>
-                </van-row>
-              </div>
-              <div class="sub-e">日息低至{{ item.daily_rate }}% | 最长可分{{ item.max_term }}个月</div>
+                  </div>
+                  <div class="sub-e">24小时放款</div>
+                </van-col>
+              </van-row>
             </van-col>
             <van-col span="9">
               <div class="b-button">
@@ -103,12 +42,11 @@ import { mapGetters } from 'vuex'
 // import { Toast } from 'vant'
 
 export default {
-  name: 'IndexHome',
+  name: 'IndexLoan',
   components: {
   },
   data() {
     return {
-      rList: [],
       list: []
     }
   },
@@ -127,13 +65,13 @@ export default {
       this.$http.get('tuiServer/customer/getUserProducts').then((res) => {
         const data = res.data || {}
         const list = data.list || []
-        const rList = []
-        list.forEach((v) => {
-          if (v.is_recommend) {
-            rList.push(v)
-          }
-        })
-        this.rList = rList
+        // const rList = []
+        // list.forEach((v) => {
+        //   if (v.is_recommend) {
+        //     rList.push(v)
+        //   }
+        // })
+        // this.rList = rList
         this.list = list
       })
     }
@@ -158,9 +96,9 @@ export default {
     margin-right: 10px;
   }
   .top-block {
-    margin: 8px 0;
+    margin-bottom: 8px;
     background-color: #fff;
-    padding: 15px;
+    padding: 15px 0;
     text-align: center;
     /deep/ {
       .van-tag{
@@ -192,17 +130,19 @@ export default {
       font-size: 30px;
     }
     .b-button {
-      margin: 0 15px;
+      margin: 0 30px;
     }
   }
   .item-l {
     margin: 8px 0;
-    padding-bottom: 50px;
   }
   .item-c {
     padding: 0 15px;
     background-color: #fff;
     margin-bottom: 8px;
+    &:last-child {
+      border-bottom: none;
+    }
     .item-title {
       padding: 10px 0;
       line-height: 24px;
@@ -230,6 +170,7 @@ export default {
         font-size: 20px;
       }
       .month {
+        margin-bottom: 10px;
         font-size: 18px;
         color: #000;
       }
