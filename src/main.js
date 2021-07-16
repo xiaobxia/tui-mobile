@@ -6,6 +6,14 @@ import {
   Col,
   Row,
   Button,
+  Tag,
+  Divider,
+  Tabbar,
+  TabbarItem,
+  NavBar,
+  Swipe,
+  SwipeItem,
+  NoticeBar
 } from 'vant'
 import moment from 'moment'
 import environmentUtil from './util/environmentUtil'
@@ -17,6 +25,14 @@ import numberUtil from '@/util/numberUtil.js'
 Vue.use(Col)
 Vue.use(Row)
 Vue.use(Button)
+Vue.use(Tag)
+Vue.use(Divider)
+Vue.use(Swipe)
+Vue.use(SwipeItem)
+Vue.use(NavBar)
+Vue.use(Tabbar)
+Vue.use(TabbarItem)
+Vue.use(NoticeBar)
 
 Vue.config.productionTip = false
 
