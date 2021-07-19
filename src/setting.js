@@ -1,3 +1,4 @@
 export default {
-  systemType: ''
+  systemType: '',
+  psidKey: 'tuiServer'
 }

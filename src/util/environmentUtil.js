@@ -1,3 +1,27 @@
+function getBrand(sUserAgent) {
+  var isHuawei = sUserAgent.indexOf('huawei') !== -1
+  var isHonor = sUserAgent.indexOf('honor') !== -1
+  var isOppo = sUserAgent.indexOf('oppo') !== -1
+  var isOppoR15 = sUserAgent.indexOf('pacm00') !== -1
+  var isVivo = sUserAgent.indexOf('vivo') !== -1
+  var isXiaomi = sUserAgent.indexOf('mi ') !== -1
+  var isXiaomi2s = sUserAgent.indexOf('mix ') !== -1
+  var isRedmi = sUserAgent.indexOf('redmi') !== -1
+  var isSamsung = sUserAgent.indexOf('sm-') !== -1
+  if (isHuawei || isHonor) {
+    return 'huawei'
+  } else if (isOppo || isOppoR15) {
+    return 'oppo'
+  } else if (isVivo) {
+    return 'vivo'
+  } else if (isXiaomi || isRedmi || isXiaomi2s) {
+    return 'xiaomi'
+  } else if (isSamsung) {
+    return 'samsung'
+  } else {
+    return ''
+  }
+}
 const environmentUtil = {
   setAdaptive() {
     const baseFontSize = 37.5
@@ -48,6 +72,22 @@ const environmentUtil = {
       fontSize: fontSize,
       baseFontSize: baseFontSize,
       zoom: fontSize / baseFontSize
+    }
+  },
+  // 获取系统和品牌信息
+  getOsInfo() {
+    const userAgent = window.navigator.userAgent.toLocaleLowerCase()
+    if (userAgent.indexOf('android') !== -1) {
+      return {
+        os: 'android',
+        brand: getBrand(userAgent) || '其他'
+      }
+    }
+    if (userAgent.match(/(iphone|ipad|ipod)/gi)) {
+      return {
+        os: 'iphone',
+        brand: 'iphone'
+      }
     }
   }
 }

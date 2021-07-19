@@ -23,6 +23,7 @@
     "amfe-flexible": "^2.2.1",
     "axios": "^0.19.1",
     "cross-env": "^7.0.2",
+    "crypto-js": "^4.0.0",
     "echarts": "^4.6.0",
     "file-saver": "^2.0.2",
     "gdt-jsapi": "^1.9.6",

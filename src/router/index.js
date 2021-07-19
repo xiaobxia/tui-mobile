@@ -17,10 +17,19 @@ export const constantRouterMap = [
       noCache: true
     }
   },
+  {
+    name: 'Register',
+    path: '/reg',
+    component: lazyLoading('Register/index'),
+    meta: {
+      auth: false,
+      noCache: true
+    }
+  },
   indexRouter,
   {
     path: '',
-    redirect: 'index/home'
+    redirect: 'reg'
   },
   {
     name: '404',

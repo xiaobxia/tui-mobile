@@ -15,8 +15,8 @@ import {
   SwipeItem,
   NoticeBar
 } from 'vant'
-import moment from 'moment'
 import environmentUtil from './util/environmentUtil'
+import psidUtil from './util/psidUtil'
 import Http from '@/util/httpUtil.js'
 import store from './store'
 import './permission'
@@ -38,13 +38,6 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = Http
 
-Vue.prototype.$formatToDay = function(day) {
-  if (!day) {
-    return ''
-  }
-  return moment(day).format('YYYY-MM-DD')
-}
-
 Vue.prototype.$deepClone = function(data) {
   return JSON.parse(JSON.stringify(data))
 }
@@ -59,8 +52,14 @@ function registerUtil(util) {
 
 // 数字工具
 registerUtil(numberUtil)
+// 环境工具
+registerUtil(environmentUtil)
 
 environmentUtil.setAdaptive()
+// 设置id
+psidUtil.setId()
+
+console.log(environmentUtil.getOsInfo())
 
 window.ENV_CONFIG = process.env.ENV_CONFIG
 console.log(window.ENV_CONFIG)
