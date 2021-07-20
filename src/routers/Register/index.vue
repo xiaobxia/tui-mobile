@@ -52,11 +52,13 @@ export default {
         channel_code: this.channelCode,
         ...this.$getOsInfo()
       }).then(() => {
+        psidUtil.setInfo('channelCode', this.channelCode)
+        psidUtil.setInfo('phone', this.phone)
         this.$router.replace({
           path: '/index/home',
           query: {
             phone: this.phone,
-            channel_code: this.channelCode
+            code: this.channelCode
           }
         })
       })

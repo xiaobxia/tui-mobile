@@ -100,12 +100,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import appMixins from '@/mixins/app'
 // import { Toast } from 'vant'
 
 export default {
   name: 'IndexHome',
   components: {
   },
+  mixins: [appMixins],
   data() {
     return {
       rList: [],
@@ -121,10 +123,12 @@ export default {
   },
   methods: {
     toHandler(row) {
-      window.location = row.url
+      this._addClick(row).then(() => {
+        // window.location = row.url
+      })
     },
     queryList() {
-      this.$http.get('tuiServer/customer/getUserProducts').then((res) => {
+      this.$http.get('tuiServer/h5/getProducts').then((res) => {
         const data = res.data || {}
         const list = data.list || []
         const rList = []

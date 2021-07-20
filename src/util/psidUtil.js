@@ -19,5 +19,14 @@ export default {
   },
   removeId() {
     return Cookies.remove(key)
+  },
+  getInfo(key) {
+    return Cookies.get(key)
+  },
+  setInfo(key, str) {
+    return Cookies.set(key, str, { expires: 7 })
+  },
+  setClick(phone, row) {
+    return CryptoJS.AES.encrypt(`${phone}+${row._id}`, setting.psidKey).toString()
   }
 }
