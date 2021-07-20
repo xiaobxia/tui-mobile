@@ -2,43 +2,64 @@
   <div class="page-login">
     <div class="l-f type-p">
       <div>
-        <input v-model="account" type="text" placeholder="请输入手机号">
+        <input v-model="phone" type="text" placeholder="请输入手机号">
       </div>
     </div>
-    <van-button type="primary" block class="l-b" @click="getPhoneCode">获取验证码</van-button>
-    <div class="l-o" @click="changeType('account')">密码登录</div>
+    <van-button :loading="loginLoading" type="primary" block class="l-b" @click="loginHandler">登录</van-button>
   </div>
 </template>
 
 <script>
 import psidUtil from '@/util/psidUtil'
-// import { Toast } from 'vant'
+import { Toast } from 'vant'
 export default {
   name: 'Register',
   data() {
     return {
-      account: '',
+      phone: '',
       password: '',
       checked: false,
-      loginLoading: false
+      loginLoading: false,
+      channelCode: ''
     }
   },
   computed: {},
   created() {
+    const query = this.$route.query
+    this.channelCode = query.code || 'neizhi'
     this.initPage()
   },
   methods: {
     initPage() {
       this.$http.get('tuiServer/h5/channelClick', {
         psid: psidUtil.getId(),
-        channel_code: '',
+        channel_code: this.channelCode,
         ...this.$getOsInfo()
       })
     },
     setPageConfig() {
     },
     loginHandler() {
+      const re = /^1(3|4|5|6|7|8|9)\d{9}$/
+      if (!re.test(this.phone)) {
+        Toast.fail('请输入正确手机号！')
+        return false
+      }
       this.loginLoading = true
+      this.$http.get('tuiServer/h5/channelPhone', {
+        psid: psidUtil.getId(),
+        phone: this.phone,
+        channel_code: this.channelCode,
+        ...this.$getOsInfo()
+      }).then(() => {
+        this.$router.replace({
+          path: '/index/home',
+          query: {
+            phone: this.phone,
+            channel_code: this.channelCode
+          }
+        })
+      })
     },
     toHome() {
       this.$router.push('/index')
