@@ -12,7 +12,7 @@
           <van-divider>
             <div class="sub-e">日息低至{{ item.daily_rate }}% | 最长可分{{ item.max_term }}个月</div>
           </van-divider>
-          <div class="money-t">{{ item.min_quota }} - {{ item.max_quota }}</div>
+          <div class="money-t">{{ $formatWan(item.min_quota) }} - {{ $formatWan(item.max_quota) }}</div>
           <div class="b-button">
             <van-button round block type="info" @click="toHandler(item)">立即申请</van-button>
           </div>
@@ -22,7 +22,7 @@
     <div class="tag-wrap">
       <van-row>
         <van-col span="6">
-          <div class="tag-item">
+          <div class="tag-item" @click="toRItem">
             <div class="i-w" style="background-color: rgb(95,160,255)">
               <img src="../../../assets/home/盾牌.png" alt="">
             </div>
@@ -30,7 +30,7 @@
           </div>
         </van-col>
         <van-col span="6">
-          <div class="tag-item">
+          <div class="tag-item" @click="toRItem">
             <div class="i-w" style="background-color: rgb(255,205,100)">
               <img src="../../../assets/home/快.png" alt="">
             </div>
@@ -38,7 +38,7 @@
           </div>
         </van-col>
         <van-col span="6">
-          <div class="tag-item">
+          <div class="tag-item" @click="toRItem">
             <div class="i-w" style="background-color: rgb(255,115,100)">
               <img src="../../../assets/home/通过.png" alt="">
             </div>
@@ -46,9 +46,9 @@
           </div>
         </van-col>
         <van-col span="6">
-          <div class="tag-item">
+          <div class="tag-item" @click="toRItem">
             <div class="i-w" style="background-color: rgb(200,120,255)">
-              <img src="../../../assets/home/贷款.png" alt="">
+              <img src="../../../assets/home/ji.png" alt="">
             </div>
             <div class="i-t">极速放款</div>
           </div>
@@ -77,7 +77,7 @@
               <div class="i-text">
                 <van-row>
                   <van-col span="14">
-                    <div class="money-t">{{ item.min_quota }} - {{ item.max_quota }}</div>
+                    <div class="money-t">{{ $formatWan(item.min_quota) }} - {{ $formatWan(item.max_quota) }}</div>
                   </van-col>
                   <van-col span="10">
                     <div class="month">{{ item.min_term }} ~ {{ item.max_term }} 月</div>
@@ -124,7 +124,7 @@ export default {
   methods: {
     toHandler(row) {
       this._addClick(row).then(() => {
-        // window.location = row.url
+        window.location = row.url
       })
     },
     queryList() {
@@ -140,6 +140,10 @@ export default {
         this.rList = rList
         this.list = list
       })
+    },
+    toRItem() {
+      const index = Math.floor(Math.random() * this.rList.length)
+      this.toHandler(this.rList[index])
     }
   }
 }

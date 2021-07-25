@@ -18,22 +18,22 @@
         name="/index/loan"
         @click="toPath('/index/loan')"
       >
-        <span>贷款</span>
+        <span>超市</span>
         <template #icon="props">
-          <img v-if="props.active" src="../../assets/tabbarIcon/贷款-a.png" >
-          <img v-else src="../../assets/tabbarIcon/贷款.png" >
+          <img v-if="props.active" src="../../assets/tabbarIcon/ji-a.png" >
+          <img v-else src="../../assets/tabbarIcon/ji.png" >
         </template>
       </van-tabbar-item>
-      <van-tabbar-item
-        name="/index/my"
-        @click="toPath('/index/my')"
-      >
-        <span>我的</span>
-        <template #icon="props">
-          <img v-if="props.active" src="../../assets/tabbarIcon/我的-a.png" >
-          <img v-else src="../../assets/tabbarIcon/我的.png" >
-        </template>
-      </van-tabbar-item>
+      <!--<van-tabbar-item-->
+      <!--name="/index/my"-->
+      <!--@click="toPath('/index/my')"-->
+      <!--&gt;-->
+      <!--<span>我的</span>-->
+      <!--<template #icon="props">-->
+      <!--<img v-if="props.active" src="../../assets/tabbarIcon/我的-a.png" >-->
+      <!--<img v-else src="../../assets/tabbarIcon/我的.png" >-->
+      <!--</template>-->
+      <!--</van-tabbar-item>-->
     </van-tabbar>
   </div>
 </template>

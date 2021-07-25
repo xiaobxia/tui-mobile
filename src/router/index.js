@@ -29,7 +29,7 @@ export const constantRouterMap = [
   indexRouter,
   {
     path: '',
-    redirect: 'reg'
+    redirect: 'index/home'
   },
   {
     name: '404',

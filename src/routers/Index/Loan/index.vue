@@ -1,6 +1,6 @@
 <template>
   <div class="view-home">
-    <van-nav-bar title="贷款超市" />
+    <van-nav-bar title="超市" />
     <div class="item-l">
       <div v-for="(item, index) in list" :key="index" class="item-c">
         <div class="item-title">
@@ -13,7 +13,7 @@
               <van-row>
                 <van-col span="15">
                   <div class="i-text">
-                    <div class="money-t">{{ item.min_quota }} - {{ item.max_quota }}</div>
+                    <div class="money-t">{{ $formatWan(item.min_quota) }} - {{ $formatWan(item.max_quota) }}</div>
                   </div>
                   <div class="sub-e">额度(元)</div>
                 </van-col>
@@ -62,7 +62,7 @@ export default {
   methods: {
     toHandler(row) {
       this._addClick(row).then(() => {
-        // window.location = row.url
+        window.location = row.url
       })
     },
     queryList() {

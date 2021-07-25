@@ -42,6 +42,14 @@ Vue.prototype.$deepClone = function(data) {
   return JSON.parse(JSON.stringify(data))
 }
 
+Vue.prototype.$formatWan = function(val) {
+  val = parseFloat(val || 0) || 0
+  if (val >= 10000) {
+    return `${Math.ceil(val / 10000)}万`
+  }
+  return val
+}
+
 function registerUtil(util) {
   for (const key in util) {
     if (util.hasOwnProperty(key)) {

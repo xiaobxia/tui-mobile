@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie'
-import CryptoJS from 'crypto-js'
+import AES from 'crypto-js/aes'
 import setting from '@/setting'
 
 const key = 'psid-tui'
@@ -13,9 +13,9 @@ export default {
       return true
     }
     // 加上时间，每个都是唯一的
-    const str = CryptoJS.AES.encrypt('' + Date.now(), setting.psidKey).toString()
-    // 7天过期
-    return Cookies.set(key, str, { expires: 7 })
+    const str = AES.encrypt('' + Date.now(), setting.psidKey).toString()
+    // 1天过期
+    return Cookies.set(key, str, { expires: 1 })
   },
   removeId() {
     return Cookies.remove(key)
@@ -24,9 +24,9 @@ export default {
     return Cookies.get(key)
   },
   setInfo(key, str) {
-    return Cookies.set(key, str, { expires: 7 })
+    return Cookies.set(key, str, { expires: 1 })
   },
   setClick(phone, row) {
-    return CryptoJS.AES.encrypt(`${phone}+${row._id}`, setting.psidKey).toString()
+    return AES.encrypt(`${phone}+${row._id}`, setting.psidKey).toString()
   }
 }
